@@ -5,10 +5,74 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Carsharing"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="Page1">
+      d:DesignHeight="775"
+      d:DesignWidth="1200"
+      Title="Page1"
+      >
 
-    <Grid Background="Yellow">
-        
-    </Grid>
+    <Border Background="Transparent" CornerRadius="20,20,20,20">
+        <Grid>
+            
+            <TabControl x:Name="products" Background="Transparent" BorderBrush="Transparent">
+                <TabControl.Resources>
+                    <Style TargetType="TabItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TabItem">
+                                    <!--The four values of CornerRadius represent the four corners of the TabItem.-->
+                                    <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="5,5,0,0" Margin="5,0,0,0">
+                                        <ContentPresenter x:Name="ContentSite"  
+                                        VerticalAlignment="Center"  
+                                        HorizontalAlignment="Center"  
+                                        ContentSource="Header"  
+                                        Margin="10,2"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="LightSkyBlue" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="False">
+                                            <Setter TargetName="Border" Property="Background" Value="GhostWhite" />
+                                            <Setter TargetName="Border" Property="Margin" Value="5,3,0,0"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabControl.Resources>
+                <TabItem Width="150" Background="DodgerBlue" FontSize="20" FontFamily="Montserrat" Header="Автомобили">
+                   
+                    <TabItem.Content>
+                        <Border Background="LightBlue" CornerRadius="0,20,20,0">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                    </TabItem.Content>
+                
+                </TabItem>
+                <TabItem Width="150" Background="DodgerBlue" FontFamily="Montserrat" FontSize="20"  Header="Тарифы">
+                    <TabItem.Content>
+                        <Border Background="LightBlue" CornerRadius="0,20,20,0">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                    </TabItem.Content>
+                </TabItem>
+                <TabItem Width="150" Background="DodgerBlue" FontFamily="Montserrat" FontSize="20"  Header="Модели">
+                    <TabItem.Content>
+                        <Border Background="LightBlue" CornerRadius="0,20,20,0">
+                            <Grid>
+
+                            </Grid>
+                        </Border>
+                    </TabItem.Content>
+                </TabItem>
+            </TabControl>
+            
+
+        </Grid>
+    </Border>
 </Page>

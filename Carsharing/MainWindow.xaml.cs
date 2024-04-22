@@ -25,6 +25,30 @@ namespace Carsharing
         {
             InitializeComponent();
         }
+        private void TargetPage(Border border)
+        {
+            if (border == RectVisCars)
+            {
+                RectVisCars.BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue); 
+                RectVisClient.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisService.BorderBrush = new SolidColorBrush(Colors.Transparent);
+
+            } else if (border == RectVisClient)
+            {
+
+                RectVisCars.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisClient.BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
+                RectVisService.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            }
+            else if (border == RectVisService)
+            {
+
+                RectVisCars.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisClient.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisService.BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
+            }
+
+        }
 
         private void ExitButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -37,6 +61,23 @@ namespace Carsharing
 
         }
 
-        
+        private void CarsButton_Click(object sender, RoutedEventArgs e)
+        {
+            PageFrame.Content = new Page1();
+            TargetPage(RectVisCars);
+            
+        }
+
+        private void ClientButton_Click(object sender, RoutedEventArgs e)
+        {
+            TargetPage(RectVisClient);
+
+        }
+
+        private void ServiceButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            TargetPage(RectVisService);
+        }
     }
 }

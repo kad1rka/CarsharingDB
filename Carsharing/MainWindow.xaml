@@ -24,7 +24,7 @@
                 <ColumnDefinition Width="1200"/>
             </Grid.ColumnDefinitions>
             <!-- Заливка основного окна -->
-            <Border Background="#2E3B47" CornerRadius="20,30,30,20" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="1"  />
+            <Border Background="#2E3B47" CornerRadius="20,30,0,20" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="1"  />
             <!-- ToolBar -->
             <Grid x:Name="ToolBar" Grid.Column="1">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
@@ -69,35 +69,106 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Image Source="/Source/carsharing.png" />
-                <Button x:Name="CarsButton" Background="Transparent" VerticalAlignment="Top" Height="40" Grid.Row="1" BorderBrush="Transparent" >
-                    <StackPanel Orientation="Horizontal" Width="290">
+                <Image Source="/Source/carsharing.png" Grid.Row="0"/>
+                
+                <Button x:Name="CarsButton" VerticalAlignment="Top" Height="40" Grid.Row="1"  BorderBrush="Transparent" Margin="0,10,0,0" Click="CarsButton_Click" >
+                    <Border x:Name="RectVisCars" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5,5,5,5">
+                        <StackPanel Orientation="Horizontal" Width="290">
                         <Image Height="32" Source="/Source/cars.png" Margin="10,0,15,0" />
-                        <TextBlock Text="Автомобили" VerticalAlignment="Center" FontFamily="Verdana" FontSize="20" Foreground="White"/>
-                    </StackPanel>
+                            <TextBlock Text="Автомобили" VerticalAlignment="Center" FontFamily="Montserrat" FontSize="20" Foreground="White"/>
+                        </StackPanel>
+                    </Border>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="Background" Value="DeepSkyBlue"/>
+                                </Trigger>
+
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
 
-                <Button Background="Transparent" VerticalAlignment="Top" Height="40" Grid.Row="1" BorderBrush="Transparent" Margin="0,40,0,0">
-                    <StackPanel Orientation="Horizontal" Width="290">
-                        <Image Height="32" Source="/Source/clients.png" Margin="10,0,15,0" />
-                        <TextBlock Text="Клиенты" VerticalAlignment="Center" FontFamily="Verdana" FontSize="20" Foreground="White"/>
-                    </StackPanel>
+                <Button x:Name="ClientButton"  VerticalAlignment="Top" Height="40" Grid.Row="1" BorderBrush="Transparent" Margin="0,50,0,0" Click="ClientButton_Click">
+                    <Border x:Name="RectVisClient" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5,5,5,5">
+                        <StackPanel Orientation="Horizontal" Width="290">
+                            <Image Height="32" Source="/Source/clients.png" Margin="10,0,15,0" />
+                            <TextBlock Text="Клиенты" VerticalAlignment="Center" FontFamily="Montserrat" FontSize="20" Foreground="White"/>
+                        </StackPanel>
+                    </Border>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="Background" Value="DeepSkyBlue"/>
+                                </Trigger>
+                                
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
 
-                <Button Background="Transparent" VerticalAlignment="Top" Height="40" Grid.Row="1" BorderBrush="Transparent" Margin="0,80,0,0">
-                    <StackPanel Orientation="Horizontal" Width="290">
-                        <Image Height="32" Source="/Source/service.png" Margin="10,0,15,0" />
-                        <TextBlock Text="Сервис" VerticalAlignment="Center" FontFamily="Verdana" FontSize="20" Foreground="White"/>
-                    </StackPanel>
+                <Button x:Name="ServiceButton" VerticalAlignment="Top" Height="40" Grid.Row="1" BorderBrush="Transparent" Margin="0,90,0,0" Click="ServiceButton_Click" >
+                    <Border x:Name="RectVisService" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5,5,5,5">
+                        <StackPanel Orientation="Horizontal" Width="290">
+                            <Image Height="32" Source="/Source/service.png" Margin="10,0,15,0" />
+                            <TextBlock Text="Сервис" VerticalAlignment="Center" FontFamily="Montserrat" FontSize="20" Foreground="White"/>
+                        </StackPanel>
+                    </Border>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="Background" Value="DeepSkyBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
                 </Button>
 
 
 
             </Grid>
+            <Rectangle Height="26" Width="300" Fill="#2E3B47" RadiusX="10" RadiusY="10" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0"/>
+            <TextBlock Text="Пожалуйста, выберите категорию" Grid.Row="1" Grid.Column="1" FontFamily="Montserrat" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            
+            <Frame x:Name="PageFrame" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.Row="1"/>
 
 
-
-            <Frame x:Name="PageFrame" Grid.Column="1" Grid.Row="1"/>
         </Grid>
     </Border>
 </Window>

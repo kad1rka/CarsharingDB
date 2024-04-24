@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Carsharing
 {
     /// <summary>
-    /// Логика взаимодействия для Page1.xaml
+    /// Логика взаимодействия для Cars.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class Cars : Page
     {
-        public Page1()
+        public Cars()
         {
             InitializeComponent();
         }

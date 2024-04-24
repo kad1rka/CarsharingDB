@@ -63,7 +63,7 @@ namespace Carsharing
 
         private void CarsButton_Click(object sender, RoutedEventArgs e)
         {
-            PageFrame.Content = new Page1();
+            PageFrame.Content = new Cars();
             TargetPage(RectVisCars);
             
         }

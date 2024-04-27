@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8bc2fc89ef87480ca5cc918821f68462" Name="Diagram1">
+        <EntityTypeShape EntityType="CarsharingModel.Accidents" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarsharingModel.Clients" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarsharingModel.Employees" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarsharingModel.Fleet" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarsharingModel.Maintenance_Events" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarsharingModel.Payments" Width="1.5" PointX="8.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarsharingModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarsharingModel.Tariffs" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarsharingModel.Trips" Width="1.5" PointX="6" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CarsharingModel.Vehicle_Coordinates" Width="1.5" PointX="3" PointY="12.375" IsExpanded="true" />
+        <AssociationConnector Association="CarsharingModel.FK__Accidents__vehic__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="CarsharingModel.FK__Payments__client__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="CarsharingModel.FK__Trips__client_id__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="CarsharingModel.FK__Maintenan__vehic__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="CarsharingModel.FK__Trips__vehicle_i__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="CarsharingModel.FK__Vehicle_C__vehic__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="CarsharingModel.FK__Payments__trip_i__5DCAEF64" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

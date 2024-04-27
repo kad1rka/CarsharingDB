@@ -1,0 +1,614 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище CarsharingModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accidents">
+          <Key>
+            <PropertyRef Name="accident_id" />
+          </Key>
+          <Property Name="accident_id" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="description" Type="text" />
+          <Property Name="vehicle_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="int" Nullable="false" />
+          <Property Name="full_name" Type="varchar" MaxLength="100" />
+          <Property Name="contact_info" Type="varchar" MaxLength="100" />
+          <Property Name="driver_license" Type="varchar" MaxLength="20" />
+          <Property Name="passport" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="int" Nullable="false" />
+          <Property Name="full_name" Type="varchar" MaxLength="100" />
+          <Property Name="position" Type="varchar" MaxLength="50" />
+          <Property Name="contact_info" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Fleet">
+          <Key>
+            <PropertyRef Name="vehicle_id" />
+          </Key>
+          <Property Name="vehicle_id" Type="int" Nullable="false" />
+          <Property Name="brand" Type="varchar" MaxLength="50" />
+          <Property Name="model" Type="varchar" MaxLength="50" />
+          <Property Name="year" Type="int" />
+          <Property Name="license_plate" Type="varchar" MaxLength="10" />
+          <Property Name="condition" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Maintenance_Events">
+          <Key>
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="event_id" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime" />
+          <Property Name="description" Type="text" />
+          <Property Name="vehicle_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="payment_id" />
+          </Key>
+          <Property Name="payment_id" Type="int" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="payment_datetime" Type="datetime" />
+          <Property Name="payment_method" Type="varchar" MaxLength="50" />
+          <Property Name="trip_id" Type="int" />
+          <Property Name="client_id" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tariffs">
+          <Key>
+            <PropertyRef Name="tariff_id" />
+          </Key>
+          <Property Name="tariff_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="cost" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="conditions" Type="text" />
+        </EntityType>
+        <EntityType Name="Trips">
+          <Key>
+            <PropertyRef Name="trip_id" />
+          </Key>
+          <Property Name="trip_id" Type="int" Nullable="false" />
+          <Property Name="start_datetime" Type="datetime" />
+          <Property Name="end_datetime" Type="datetime" />
+          <Property Name="location" Type="varchar" MaxLength="100" />
+          <Property Name="cost" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="client_id" Type="int" />
+          <Property Name="vehicle_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Vehicle_Coordinates">
+          <Key>
+            <PropertyRef Name="coordinate_id" />
+          </Key>
+          <Property Name="coordinate_id" Type="int" Nullable="false" />
+          <Property Name="latitude" Type="decimal" Precision="10" Scale="6" />
+          <Property Name="longitude" Type="decimal" Precision="10" Scale="6" />
+          <Property Name="update_datetime" Type="datetime" />
+          <Property Name="vehicle_id" Type="int" />
+        </EntityType>
+        <Association Name="FK__Accidents__vehic__5812160E">
+          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
+          <End Role="Accidents" Type="Self.Accidents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fleet">
+              <PropertyRef Name="vehicle_id" />
+            </Principal>
+            <Dependent Role="Accidents">
+              <PropertyRef Name="vehicle_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Maintenan__vehic__5535A963">
+          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
+          <End Role="Maintenance_Events" Type="Self.Maintenance_Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fleet">
+              <PropertyRef Name="vehicle_id" />
+            </Principal>
+            <Dependent Role="Maintenance_Events">
+              <PropertyRef Name="vehicle_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__client__5EBF139D">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__trip_i__5DCAEF64">
+          <End Role="Trips" Type="Self.Trips" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trips">
+              <PropertyRef Name="trip_id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="trip_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trips__client_id__4F7CD00D">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Trips">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trips__vehicle_i__5070F446">
+          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
+          <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fleet">
+              <PropertyRef Name="vehicle_id" />
+            </Principal>
+            <Dependent Role="Trips">
+              <PropertyRef Name="vehicle_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vehicle_C__vehic__5AEE82B9">
+          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
+          <End Role="Vehicle_Coordinates" Type="Self.Vehicle_Coordinates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fleet">
+              <PropertyRef Name="vehicle_id" />
+            </Principal>
+            <Dependent Role="Vehicle_Coordinates">
+              <PropertyRef Name="vehicle_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище CarsharingModelContainer">
+          <EntitySet Name="Accidents" EntityType="Self.Accidents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fleet" EntityType="Self.Fleet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maintenance_Events" EntityType="Self.Maintenance_Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tariffs" EntityType="Self.Tariffs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trips" EntityType="Self.Trips" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vehicle_Coordinates" EntityType="Self.Vehicle_Coordinates" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Accidents__vehic__5812160E" Association="Self.FK__Accidents__vehic__5812160E">
+            <End Role="Fleet" EntitySet="Fleet" />
+            <End Role="Accidents" EntitySet="Accidents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Maintenan__vehic__5535A963" Association="Self.FK__Maintenan__vehic__5535A963">
+            <End Role="Fleet" EntitySet="Fleet" />
+            <End Role="Maintenance_Events" EntitySet="Maintenance_Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__client__5EBF139D" Association="Self.FK__Payments__client__5EBF139D">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__trip_i__5DCAEF64" Association="Self.FK__Payments__trip_i__5DCAEF64">
+            <End Role="Trips" EntitySet="Trips" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trips__client_id__4F7CD00D" Association="Self.FK__Trips__client_id__4F7CD00D">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Trips" EntitySet="Trips" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trips__vehicle_i__5070F446" Association="Self.FK__Trips__vehicle_i__5070F446">
+            <End Role="Fleet" EntitySet="Fleet" />
+            <End Role="Trips" EntitySet="Trips" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vehicle_C__vehic__5AEE82B9" Association="Self.FK__Vehicle_C__vehic__5AEE82B9">
+            <End Role="Fleet" EntitySet="Fleet" />
+            <End Role="Vehicle_Coordinates" EntitySet="Vehicle_Coordinates" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarsharingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accidents">
+          <Key>
+            <PropertyRef Name="accident_id" />
+          </Key>
+          <Property Name="accident_id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="vehicle_id" Type="Int32" />
+          <NavigationProperty Name="Fleet" Relationship="Self.FK__Accidents__vehic__5812160E" FromRole="Accidents" ToRole="Fleet" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="client_id" />
+          </Key>
+          <Property Name="client_id" Type="Int32" Nullable="false" />
+          <Property Name="full_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="contact_info" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="driver_license" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="passport" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__client__5EBF139D" FromRole="Clients" ToRole="Payments" />
+          <NavigationProperty Name="Trips" Relationship="Self.FK__Trips__client_id__4F7CD00D" FromRole="Clients" ToRole="Trips" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="employee_id" />
+          </Key>
+          <Property Name="employee_id" Type="Int32" Nullable="false" />
+          <Property Name="full_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="contact_info" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Fleet">
+          <Key>
+            <PropertyRef Name="vehicle_id" />
+          </Key>
+          <Property Name="vehicle_id" Type="Int32" Nullable="false" />
+          <Property Name="brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="year" Type="Int32" />
+          <Property Name="license_plate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="condition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Accidents" Relationship="Self.FK__Accidents__vehic__5812160E" FromRole="Fleet" ToRole="Accidents" />
+          <NavigationProperty Name="Maintenance_Events" Relationship="Self.FK__Maintenan__vehic__5535A963" FromRole="Fleet" ToRole="Maintenance_Events" />
+          <NavigationProperty Name="Trips" Relationship="Self.FK__Trips__vehicle_i__5070F446" FromRole="Fleet" ToRole="Trips" />
+          <NavigationProperty Name="Vehicle_Coordinates" Relationship="Self.FK__Vehicle_C__vehic__5AEE82B9" FromRole="Fleet" ToRole="Vehicle_Coordinates" />
+        </EntityType>
+        <EntityType Name="Maintenance_Events">
+          <Key>
+            <PropertyRef Name="event_id" />
+          </Key>
+          <Property Name="event_id" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Precision="3" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="vehicle_id" Type="Int32" />
+          <NavigationProperty Name="Fleet" Relationship="Self.FK__Maintenan__vehic__5535A963" FromRole="Maintenance_Events" ToRole="Fleet" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="payment_id" />
+          </Key>
+          <Property Name="payment_id" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="payment_datetime" Type="DateTime" Precision="3" />
+          <Property Name="payment_method" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="trip_id" Type="Int32" />
+          <Property Name="client_id" Type="Int32" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Payments__client__5EBF139D" FromRole="Payments" ToRole="Clients" />
+          <NavigationProperty Name="Trips" Relationship="Self.FK__Payments__trip_i__5DCAEF64" FromRole="Payments" ToRole="Trips" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tariffs">
+          <Key>
+            <PropertyRef Name="tariff_id" />
+          </Key>
+          <Property Name="tariff_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cost" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="conditions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Trips">
+          <Key>
+            <PropertyRef Name="trip_id" />
+          </Key>
+          <Property Name="trip_id" Type="Int32" Nullable="false" />
+          <Property Name="start_datetime" Type="DateTime" Precision="3" />
+          <Property Name="end_datetime" Type="DateTime" Precision="3" />
+          <Property Name="location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cost" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="client_id" Type="Int32" />
+          <Property Name="vehicle_id" Type="Int32" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK__Trips__client_id__4F7CD00D" FromRole="Trips" ToRole="Clients" />
+          <NavigationProperty Name="Fleet" Relationship="Self.FK__Trips__vehicle_i__5070F446" FromRole="Trips" ToRole="Fleet" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__trip_i__5DCAEF64" FromRole="Trips" ToRole="Payments" />
+        </EntityType>
+        <EntityType Name="Vehicle_Coordinates">
+          <Key>
+            <PropertyRef Name="coordinate_id" />
+          </Key>
+          <Property Name="coordinate_id" Type="Int32" Nullable="false" />
+          <Property Name="latitude" Type="Decimal" Precision="10" Scale="6" />
+          <Property Name="longitude" Type="Decimal" Precision="10" Scale="6" />
+          <Property Name="update_datetime" Type="DateTime" Precision="3" />
+          <Property Name="vehicle_id" Type="Int32" />
+          <NavigationProperty Name="Fleet" Relationship="Self.FK__Vehicle_C__vehic__5AEE82B9" FromRole="Vehicle_Coordinates" ToRole="Fleet" />
+        </EntityType>
+        <Association Name="FK__Accidents__vehic__5812160E">
+          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
+          <End Role="Accidents" Type="Self.Accidents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fleet">
+              <PropertyRef Name="vehicle_id" />
+            </Principal>
+            <Dependent Role="Accidents">
+              <PropertyRef Name="vehicle_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__client__5EBF139D">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trips__client_id__4F7CD00D">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="client_id" />
+            </Principal>
+            <Dependent Role="Trips">
+              <PropertyRef Name="client_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Maintenan__vehic__5535A963">
+          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
+          <End Role="Maintenance_Events" Type="Self.Maintenance_Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fleet">
+              <PropertyRef Name="vehicle_id" />
+            </Principal>
+            <Dependent Role="Maintenance_Events">
+              <PropertyRef Name="vehicle_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trips__vehicle_i__5070F446">
+          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
+          <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fleet">
+              <PropertyRef Name="vehicle_id" />
+            </Principal>
+            <Dependent Role="Trips">
+              <PropertyRef Name="vehicle_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Vehicle_C__vehic__5AEE82B9">
+          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
+          <End Role="Vehicle_Coordinates" Type="Self.Vehicle_Coordinates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fleet">
+              <PropertyRef Name="vehicle_id" />
+            </Principal>
+            <Dependent Role="Vehicle_Coordinates">
+              <PropertyRef Name="vehicle_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__trip_i__5DCAEF64">
+          <End Role="Trips" Type="Self.Trips" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trips">
+              <PropertyRef Name="trip_id" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="trip_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CarsharingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accidents" EntityType="Self.Accidents" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Fleet" EntityType="Self.Fleet" />
+          <EntitySet Name="Maintenance_Events" EntityType="Self.Maintenance_Events" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tariffs" EntityType="Self.Tariffs" />
+          <EntitySet Name="Trips" EntityType="Self.Trips" />
+          <EntitySet Name="Vehicle_Coordinates" EntityType="Self.Vehicle_Coordinates" />
+          <AssociationSet Name="FK__Accidents__vehic__5812160E" Association="Self.FK__Accidents__vehic__5812160E">
+            <End Role="Fleet" EntitySet="Fleet" />
+            <End Role="Accidents" EntitySet="Accidents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__client__5EBF139D" Association="Self.FK__Payments__client__5EBF139D">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trips__client_id__4F7CD00D" Association="Self.FK__Trips__client_id__4F7CD00D">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Trips" EntitySet="Trips" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Maintenan__vehic__5535A963" Association="Self.FK__Maintenan__vehic__5535A963">
+            <End Role="Fleet" EntitySet="Fleet" />
+            <End Role="Maintenance_Events" EntitySet="Maintenance_Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trips__vehicle_i__5070F446" Association="Self.FK__Trips__vehicle_i__5070F446">
+            <End Role="Fleet" EntitySet="Fleet" />
+            <End Role="Trips" EntitySet="Trips" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Vehicle_C__vehic__5AEE82B9" Association="Self.FK__Vehicle_C__vehic__5AEE82B9">
+            <End Role="Fleet" EntitySet="Fleet" />
+            <End Role="Vehicle_Coordinates" EntitySet="Vehicle_Coordinates" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__trip_i__5DCAEF64" Association="Self.FK__Payments__trip_i__5DCAEF64">
+            <End Role="Trips" EntitySet="Trips" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CarsharingModelContainer" CdmEntityContainer="CarsharingEntities">
+          <EntitySetMapping Name="Accidents">
+            <EntityTypeMapping TypeName="CarsharingModel.Accidents">
+              <MappingFragment StoreEntitySet="Accidents">
+                <ScalarProperty Name="accident_id" ColumnName="accident_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="CarsharingModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="contact_info" ColumnName="contact_info" />
+                <ScalarProperty Name="driver_license" ColumnName="driver_license" />
+                <ScalarProperty Name="passport" ColumnName="passport" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="CarsharingModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="contact_info" ColumnName="contact_info" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fleet">
+            <EntityTypeMapping TypeName="CarsharingModel.Fleet">
+              <MappingFragment StoreEntitySet="Fleet">
+                <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
+                <ScalarProperty Name="brand" ColumnName="brand" />
+                <ScalarProperty Name="model" ColumnName="model" />
+                <ScalarProperty Name="year" ColumnName="year" />
+                <ScalarProperty Name="license_plate" ColumnName="license_plate" />
+                <ScalarProperty Name="condition" ColumnName="condition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maintenance_Events">
+            <EntityTypeMapping TypeName="CarsharingModel.Maintenance_Events">
+              <MappingFragment StoreEntitySet="Maintenance_Events">
+                <ScalarProperty Name="event_id" ColumnName="event_id" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="CarsharingModel.Payments">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="payment_id" ColumnName="payment_id" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="payment_datetime" ColumnName="payment_datetime" />
+                <ScalarProperty Name="payment_method" ColumnName="payment_method" />
+                <ScalarProperty Name="trip_id" ColumnName="trip_id" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CarsharingModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tariffs">
+            <EntityTypeMapping TypeName="CarsharingModel.Tariffs">
+              <MappingFragment StoreEntitySet="Tariffs">
+                <ScalarProperty Name="tariff_id" ColumnName="tariff_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="conditions" ColumnName="conditions" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trips">
+            <EntityTypeMapping TypeName="CarsharingModel.Trips">
+              <MappingFragment StoreEntitySet="Trips">
+                <ScalarProperty Name="trip_id" ColumnName="trip_id" />
+                <ScalarProperty Name="start_datetime" ColumnName="start_datetime" />
+                <ScalarProperty Name="end_datetime" ColumnName="end_datetime" />
+                <ScalarProperty Name="location" ColumnName="location" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+                <ScalarProperty Name="client_id" ColumnName="client_id" />
+                <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vehicle_Coordinates">
+            <EntityTypeMapping TypeName="CarsharingModel.Vehicle_Coordinates">
+              <MappingFragment StoreEntitySet="Vehicle_Coordinates">
+                <ScalarProperty Name="coordinate_id" ColumnName="coordinate_id" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="update_datetime" ColumnName="update_datetime" />
+                <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -23,6 +23,11 @@ namespace Carsharing
         public Cars()
         {
             InitializeComponent();
+            carsDataGrid.ItemsSource = CarsharingEntities.GetContext().Fleet.ToArray();
+            countRows.Text = CarsharingEntities.GetContext().Fleet.Count().ToString();
+              
         }
+
+        
     }
 }

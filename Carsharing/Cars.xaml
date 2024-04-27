@@ -7,6 +7,44 @@
       mc:Ignorable="d" 
       d:DesignHeight="775" d:DesignWidth="1200"
       Title="Cars">
+    
+    <Page.Resources>
+        
+        <Style TargetType="Thumb">
+
+            <Setter Property="Template">
+                
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Rectangle Fill="{TemplateBinding Background}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ScrollBar">
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid Background="{TemplateBinding Background}"  >
+                            <Track x:Name="PART_Track" >
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.LineUpCommand" Visibility="Hidden" />
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.LineDownCommand" Visibility="Hidden" />
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb >
+                                    <Thumb Background="#6F6D6D" BorderBrush="#6F6D6D"/>
+
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
     <Border Background="Transparent" CornerRadius="20,20,20,20">
         <Grid>
@@ -39,8 +77,146 @@
                         </Setter>
                     </Style>
                 </TabControl.Resources>
-                <TabItem Width="150" Background="DodgerBlue" FontSize="20" FontFamily="Montserrat" Header="Автомобили">
+                <TabItem Width="150" Background="DodgerBlue" FontSize="18" HorizontalContentAlignment="Left" FontFamily="Montserrat" Header="Автомобили">
 
+                    <TabItem.Content>
+                        <Border Background="LightBlue" CornerRadius="0,0,20,0">
+                            <Grid>
+                                <StackPanel Orientation="Horizontal" Height="25" VerticalAlignment="Top"  HorizontalAlignment="Left" Margin="38,60,0,0">
+                                    <TextBlock x:Name="countRows" Text="999999999" FontSize="21" FontFamily="Montserrat" Height="25" VerticalAlignment="Top"/>
+                                    <TextBlock Text=" строк обнаружено" Height="25" FontFamily="Montserrat" VerticalAlignment="Bottom"/>
+                                </StackPanel>
+                                <Button Content="+ Добавить новый автомобиль" Foreground="White"  BorderThickness="0" FontFamily="Montserrat" FontSize="13" Width="230" Height="30" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0,70,20,0"  >
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="4"/>
+                                        </Style>
+                                    </Button.Resources>
+                                    <Button.Style>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Background" Value="MediumSlateBlue"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}">
+                                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Cursor" Value="Hand"/>
+                                                    <Setter Property="Background" Value="#AA00FF"/>
+                                                </Trigger>
+
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+                                <DataGrid x:Name="carsDataGrid"  GridLinesVisibility="None" CanUserResizeRows="False" CanUserResizeColumns="False" HeadersVisibility="Column" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="Montserrat" FontSize="16" Background="Transparent" BorderThickness="0" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False" IsReadOnly="True" Width="1140" Height="536" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="38,105,15,0">
+
+                                    <DataGrid.Resources>
+                                        <Style TargetType="DataGridColumnHeader">
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="Margin" Value="5"/>
+                                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                                            <Setter Property="Foreground" Value="#615D5D"/>
+                                            <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Cursor" Value="Hand" />
+                                            </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                        <Style TargetType="DataGridRow">
+                                            <Setter Property="Background" Value="Transparent"/>
+                                            <Setter Property="Background" Value="White"/>
+                                            <Setter Property="Margin" Value="0,5,0,0"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type DataGridRow}">
+                                                        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8" Padding="0,5,0,5">
+                                                            <SelectiveScrollingGrid>
+                                                                <SelectiveScrollingGrid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto"/>
+                                                                    <ColumnDefinition />
+                                                                </SelectiveScrollingGrid.ColumnDefinitions>
+                                                                <DataGridCellsPresenter Grid.Column="1" ItemsPanel="{TemplateBinding ItemsPanel}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                                            </SelectiveScrollingGrid>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                        <Style TargetType="DataGridCell">
+                                            <Setter Property="Margin" Value="0,5,5,5" />
+                                        </Style>
+                                    </DataGrid.Resources>
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="номер" Binding="{Binding vehicle_id}" Width="100">
+                                            
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                                    
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="марка" Binding="{Binding brand}" Width="150"/>
+                                        <DataGridTextColumn Header="модель" Binding="{Binding model}" Width="150"/>
+                                        <DataGridTextColumn Header="год" Binding="{Binding year}" Width="100"/>
+                                        <DataGridTextColumn Header="номер лицензии" Binding="{Binding license_plate}" Width="160"/>
+                                        <DataGridTextColumn Header="описание" Binding="{Binding condition}" Width="*"/>
+                                        <DataGridTemplateColumn>
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Border Background="MediumSlateBlue"  Margin="0,0,5,0" Height="25" Width="25" CornerRadius="5">
+                                                            <Button  Background="Transparent" BorderThickness="0">
+                                                                <Image Source="/Source/editButton.png" Height="19" Width="19"/>
+                                                                <Button.Style>
+                                                                    <Style TargetType="{x:Type Button}">
+                                                                        
+                                                                        <Style.Triggers>
+                                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                                <Setter Property="Cursor" Value="Hand"/>
+                                                                            </Trigger>
+
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Button.Style>
+                                                            </Button>
+                                                        </Border>
+                                                        <Border Background="IndianRed"  Margin="5,0,0,0" Height="25" Width="25" CornerRadius="5">
+                                                            <Button Background="Transparent" BorderThickness="0">
+                                                                <Image Source="/Source/deleteButton.png" Height="15" Width="15"/>
+                                                                <Button.Style>
+                                                                    <Style TargetType="{x:Type Button}">
+
+                                                                        <Style.Triggers>
+                                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                                <Setter Property="Cursor" Value="Hand"/>
+                                                                            </Trigger>
+
+                                                                        </Style.Triggers>
+                                                                    </Style>
+                                                                </Button.Style>
+                                                            </Button>
+                                                        </Border>
+                                                    </StackPanel>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+
+                            </Grid>
+                        </Border>
+                    </TabItem.Content>
+
+                </TabItem>
+                <TabItem Width="150" Background="DodgerBlue" FontFamily="Montserrat" FontSize="18"  Header="Тарифы">
                     <TabItem.Content>
                         <Border Background="LightBlue" CornerRadius="0,20,20,0">
                             <Grid>
@@ -48,18 +224,8 @@
                             </Grid>
                         </Border>
                     </TabItem.Content>
-
                 </TabItem>
-                <TabItem Width="150" Background="DodgerBlue" FontFamily="Montserrat" FontSize="20"  Header="Тарифы">
-                    <TabItem.Content>
-                        <Border Background="LightBlue" CornerRadius="0,20,20,0">
-                            <Grid>
-
-                            </Grid>
-                        </Border>
-                    </TabItem.Content>
-                </TabItem>
-                <TabItem Width="150" Background="DodgerBlue" FontFamily="Montserrat" FontSize="20"  Header="Модели">
+                <TabItem Width="150" Background="DodgerBlue" FontFamily="Montserrat" FontSize="18"  Header="Модели">
                     <TabItem.Content>
                         <Border Background="LightBlue" CornerRadius="0,20,20,0">
                             <Grid>

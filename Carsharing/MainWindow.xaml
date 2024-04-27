@@ -11,7 +11,8 @@
         WindowStartupLocation="CenterScreen" 
         Background="Transparent"
         AllowsTransparency="True"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Icon="Source/carsharing.png">
     <Border Background="#272B2F" CornerRadius="20">
         <Grid>
             <!-- Grid -->
@@ -23,18 +24,20 @@
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="1200"/>
             </Grid.ColumnDefinitions>
+            
             <!-- Заливка основного окна -->
             <Border Background="#2E3B47" CornerRadius="20,30,0,20" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="1"  />
             <!-- ToolBar -->
-            <Grid x:Name="ToolBar" Grid.Column="1">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+            <Grid x:Name="ToolBar" Background="Transparent" Grid.Column="1" MouseDown="ToolBar_MouseDown" >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                     <!-- Кнопка свернуть -->
-                    <Image Name="MinButton" Width="15" Margin="5,5,15,5" MouseDown="MinButton_MouseDown">
+                    <Button x:Name="MinButton" Background="Transparent" BorderThickness="0" Width="40" Click="MinButton_Click">
+                    <Image  Width="15" Margin="5,5,5,5" MouseDown="MinButton_MouseDown">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Setter Property="Source" Value="Source/MinimizedNonActivate.png"/>
                                 <Style.Triggers>
-                                    <DataTrigger Binding="{Binding IsMouseOver, ElementName=MinButton}" Value="True">
+                                    <DataTrigger Binding="{Binding IsMouseOver}" Value="True">
                                         <Setter Property="Cursor" Value="Hand"/>
                                         <Setter Property="Source" Value="Source/MinimaizedActivate.png" />
                                     </DataTrigger>
@@ -42,22 +45,28 @@
                             </Style>
                         </Image.Style>
                     </Image>
+                    </Button>
                     <!-- Кнопка закрыть -->
-                    
-                    <Image Name="ExitButton" Height="15" Margin="5,5,20,5" MouseDown="ExitButton_MouseDown">
+                    <Button x:Name="ExitButton" Background="Transparent" BorderThickness="0" Width="40" Click="ExitButton_Click" >
+                    <Image  Width="15"  MouseDown="ExitButton_MouseDown">
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Setter Property="Source" Value="Source/ExitNonActivate.png"/>
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding IsMouseOver, ElementName=ExitButton}" Value="True">
-                                        <Setter Property="Cursor" Value="Hand"/>
+                                        
                                         <Setter Property="Source" Value="Source/ExitActivate.png" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </Image.Style>
                     </Image>
-                    
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="0,20,0,0"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
                 </StackPanel>
             </Grid>
             
@@ -163,7 +172,7 @@
 
 
             </Grid>
-            <Rectangle Height="26" Width="300" Fill="#2E3B47" RadiusX="10" RadiusY="10" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0"/>
+            <Rectangle Height="25" Width="330" Fill="#2E3B47" RadiusX="10" RadiusY="10" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0"/>
             <TextBlock Text="Пожалуйста, выберите категорию" Grid.Row="1" Grid.Column="1" FontFamily="Montserrat" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             
             <Frame x:Name="PageFrame" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.Row="1"/>

@@ -80,7 +80,7 @@
                 </Grid.RowDefinitions>
                 <Image Source="/Source/carsharing.png" Grid.Row="0"/>
                 
-                <Button x:Name="CarsButton" VerticalAlignment="Top" Height="40" Grid.Row="1"  BorderBrush="Transparent" Margin="0,10,0,0" Click="CarsButton_Click" >
+                <Button x:Name="CarsButton"  VerticalAlignment="Top" Height="40" Grid.Row="1"  BorderBrush="Transparent" Margin="0,10,0,0" Click="CarsButton_Click" >
                     <Border x:Name="RectVisCars" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5,5,5,5">
                         <StackPanel Orientation="Horizontal" Width="290">
                         <Image Height="32" Source="/Source/cars.png" Margin="10,0,15,0" />
@@ -104,7 +104,7 @@
                                     <Setter Property="Cursor" Value="Hand"/>
                                     <Setter Property="Background" Value="DeepSkyBlue"/>
                                 </Trigger>
-
+                                
                             </Style.Triggers>
                         </Style>
                     </Button.Style>

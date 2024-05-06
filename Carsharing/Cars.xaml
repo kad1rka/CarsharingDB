@@ -49,7 +49,7 @@
     <Border Background="Transparent" CornerRadius="20,20,20,20">
         <Grid>
 
-            <TabControl x:Name="products" Background="Transparent" BorderBrush="Transparent">
+            <TabControl Background="Transparent" BorderBrush="Transparent">
                 <TabControl.Resources>
                     <Style TargetType="TabItem">
                         <Setter Property="Template">
@@ -77,15 +77,19 @@
                         </Setter>
                     </Style>
                 </TabControl.Resources>
+                
+                <!--Категория Автомобили-->
                 <TabItem Width="150" Background="DodgerBlue" FontSize="18" HorizontalContentAlignment="Left" FontFamily="Montserrat" Header="Автомобили">
 
                     <TabItem.Content>
                         <Border Background="LightBlue" CornerRadius="0,0,20,0">
                             <Grid>
-                                <StackPanel Orientation="Horizontal" Height="25" VerticalAlignment="Top"  HorizontalAlignment="Left" Margin="38,60,0,0">
-                                    <TextBlock x:Name="countRows" Text="999999999" FontSize="21" FontFamily="Montserrat" Height="25" VerticalAlignment="Top"/>
+                                <!--Строк обнаружено-->
+                                <StackPanel Orientation="Horizontal" Height="25" VerticalAlignment="Top"  HorizontalAlignment="Left" Margin="38,40,0,0">
+                                    <TextBlock x:Name="countRows" Text="999999999"  Height="25" VerticalAlignment="Top"/>
                                     <TextBlock Text=" строк обнаружено" Height="25" FontFamily="Montserrat" VerticalAlignment="Bottom"/>
                                 </StackPanel>
+                                <!--Кнопка добавления нового автомобиля-->
                                 <Button Content="+ Добавить новый автомобиль" Foreground="White"  BorderThickness="0" FontFamily="Montserrat" FontSize="13" Width="230" Height="30" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0,70,20,0"  >
                                     <Button.Resources>
                                         <Style TargetType="Border">
@@ -114,7 +118,7 @@
                                         </Style>
                                     </Button.Style>
                                 </Button>
-
+                                <!--Данные из БД - Датагрид -->
                                 <DataGrid x:Name="carsDataGrid"  GridLinesVisibility="None" CanUserResizeRows="False" CanUserResizeColumns="False" HeadersVisibility="Column" d:ItemsSource="{d:SampleData ItemCount=5}" FontFamily="Montserrat" FontSize="16" Background="Transparent" BorderThickness="0" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False" IsReadOnly="True" Width="1140" Height="536" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="38,105,15,0">
 
                                     <DataGrid.Resources>
@@ -172,6 +176,7 @@
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
+                                                        <!--Кнпока редактировать-->
                                                         <Border Background="MediumSlateBlue"  Margin="0,0,5,0" Height="25" Width="25" CornerRadius="5">
                                                             <Button  Background="Transparent" BorderThickness="0">
                                                                 <Image Source="/Source/editButton.png" Height="19" Width="19"/>
@@ -188,6 +193,7 @@
                                                                 </Button.Style>
                                                             </Button>
                                                         </Border>
+                                                        <!--Кнопка удалить-->
                                                         <Border Background="IndianRed"  Margin="5,0,0,0" Height="25" Width="25" CornerRadius="5">
                                                             <Button Background="Transparent" BorderThickness="0">
                                                                 <Image Source="/Source/deleteButton.png" Height="15" Width="15"/>
@@ -218,8 +224,9 @@
                 </TabItem>
                 <TabItem Width="150" Background="DodgerBlue" FontFamily="Montserrat" FontSize="18"  Header="Тарифы">
                     <TabItem.Content>
-                        <Border Background="LightBlue" CornerRadius="0,20,20,0">
+                        <Border Background="LightBlue" CornerRadius="0,0,20,0">
                             <Grid>
+                                
 
                             </Grid>
                         </Border>
@@ -227,7 +234,7 @@
                 </TabItem>
                 <TabItem Width="150" Background="DodgerBlue" FontFamily="Montserrat" FontSize="18"  Header="Модели">
                     <TabItem.Content>
-                        <Border Background="LightBlue" CornerRadius="0,20,20,0">
+                        <Border Background="LightBlue" CornerRadius="0,0,20,0">
                             <Grid>
 
                             </Grid>

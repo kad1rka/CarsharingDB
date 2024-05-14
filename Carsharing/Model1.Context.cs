@@ -13,34 +13,35 @@ namespace Carsharing
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CarsharingEntities : DbContext
+    public partial class dbCarsharing : DbContext
     {
-        private static CarsharingEntities _context;
-        public CarsharingEntities()
-            : base("name=CarsharingEntities")
+        private static dbCarsharing _context;
+        public dbCarsharing()
+            : base("name=dbCarsharing")
         {
         }
-        public static CarsharingEntities GetContext()
+        public static dbCarsharing GetContext()
         {
             if (_context == null) 
-                _context = new CarsharingEntities();
+                _context = new dbCarsharing();
             return _context;
-            
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Accidents> Accidents { get; set; }
-        public virtual DbSet<Clients> Clients { get; set; }
-        public virtual DbSet<Employees> Employees { get; set; }
-        public virtual DbSet<Fleet> Fleet { get; set; }
-        public virtual DbSet<Maintenance_Events> Maintenance_Events { get; set; }
-        public virtual DbSet<Payments> Payments { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Tariffs> Tariffs { get; set; }
-        public virtual DbSet<Trips> Trips { get; set; }
-        public virtual DbSet<Vehicle_Coordinates> Vehicle_Coordinates { get; set; }
+        public virtual DbSet<Автомобили> Автомобили { get; set; }
+        public virtual DbSet<ДТП> ДТП { get; set; }
+        public virtual DbSet<Категории_Тех_Обслуживания> Категории_Тех_Обслуживания { get; set; }
+        public virtual DbSet<Клиенты> Клиенты { get; set; }
+        public virtual DbSet<Локации_Парковочных_Мест> Локации_Парковочных_Мест { get; set; }
+        public virtual DbSet<Оплата> Оплата { get; set; }
+        public virtual DbSet<Поездки> Поездки { get; set; }
+        public virtual DbSet<Статус_Автомобиля> Статус_Автомобиля { get; set; }
+        public virtual DbSet<Страховые_Данные> Страховые_Данные { get; set; }
+        public virtual DbSet<Тарифы> Тарифы { get; set; }
+        public virtual DbSet<Техническое_Обслуживание> Техническое_Обслуживание { get; set; }
     }
 }

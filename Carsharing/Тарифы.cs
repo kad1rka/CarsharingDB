@@ -12,25 +12,21 @@ namespace Carsharing
     using System;
     using System.Collections.Generic;
     
-    public partial class Trips
+    public partial class Тарифы
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Trips()
+        public Тарифы()
         {
-            this.Payments = new HashSet<Payments>();
+            this.Поездки = new HashSet<Поездки>();
         }
     
-        public int trip_id { get; set; }
-        public Nullable<System.DateTime> start_datetime { get; set; }
-        public Nullable<System.DateTime> end_datetime { get; set; }
-        public string location { get; set; }
-        public Nullable<decimal> cost { get; set; }
-        public Nullable<int> client_id { get; set; }
-        public Nullable<int> vehicle_id { get; set; }
+        public int ID_Тарифа { get; set; }
+        public string Наименование { get; set; }
+        public Nullable<decimal> Стоимость { get; set; }
+        public Nullable<int> Мин_Стаж { get; set; }
+        public Nullable<int> Мин_Возраст { get; set; }
     
-        public virtual Clients Clients { get; set; }
-        public virtual Fleet Fleet { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Payments> Payments { get; set; }
+        public virtual ICollection<Поездки> Поездки { get; set; }
     }
 }

@@ -12,16 +12,15 @@ namespace Carsharing
     using System;
     using System.Collections.Generic;
     
-    public partial class Payments
+    public partial class Техническое_Обслуживание
     {
-        public int payment_id { get; set; }
-        public Nullable<decimal> amount { get; set; }
-        public Nullable<System.DateTime> payment_datetime { get; set; }
-        public string payment_method { get; set; }
-        public Nullable<int> trip_id { get; set; }
-        public Nullable<int> client_id { get; set; }
+        public int ID_Тех_Обслуживания { get; set; }
+        public Nullable<int> ID_Автомобиля { get; set; }
+        public Nullable<int> ID_Категории_Тех_Обслуживания { get; set; }
+        public Nullable<System.DateTime> Дата { get; set; }
+        public string Описание { get; set; }
     
-        public virtual Clients Clients { get; set; }
-        public virtual Trips Trips { get; set; }
+        public virtual Автомобили Автомобили { get; set; }
+        public virtual Категории_Тех_Обслуживания Категории_Тех_Обслуживания { get; set; }
     }
 }

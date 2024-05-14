@@ -12,14 +12,15 @@ namespace Carsharing
     using System;
     using System.Collections.Generic;
     
-    public partial class Vehicle_Coordinates
+    public partial class ДТП
     {
-        public int coordinate_id { get; set; }
-        public Nullable<decimal> latitude { get; set; }
-        public Nullable<decimal> longitude { get; set; }
-        public Nullable<System.DateTime> update_datetime { get; set; }
-        public Nullable<int> vehicle_id { get; set; }
+        public int ID_ДТП { get; set; }
+        public Nullable<int> ID_Автомобиля { get; set; }
+        public Nullable<int> ID_Клиента { get; set; }
+        public Nullable<System.DateTime> Дата { get; set; }
+        public string Описание { get; set; }
     
-        public virtual Fleet Fleet { get; set; }
+        public virtual Автомобили Автомобили { get; set; }
+        public virtual Клиенты Клиенты { get; set; }
     }
 }

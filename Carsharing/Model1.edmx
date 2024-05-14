@@ -4,66 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище CarsharingModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Accidents">
-          <Key>
-            <PropertyRef Name="accident_id" />
-          </Key>
-          <Property Name="accident_id" Type="int" Nullable="false" />
-          <Property Name="date" Type="datetime" />
-          <Property Name="description" Type="text" />
-          <Property Name="vehicle_id" Type="int" />
-        </EntityType>
-        <EntityType Name="Clients">
-          <Key>
-            <PropertyRef Name="client_id" />
-          </Key>
-          <Property Name="client_id" Type="int" Nullable="false" />
-          <Property Name="full_name" Type="varchar" MaxLength="100" />
-          <Property Name="contact_info" Type="varchar" MaxLength="100" />
-          <Property Name="driver_license" Type="varchar" MaxLength="20" />
-          <Property Name="passport" Type="varchar" MaxLength="20" />
-        </EntityType>
-        <EntityType Name="Employees">
-          <Key>
-            <PropertyRef Name="employee_id" />
-          </Key>
-          <Property Name="employee_id" Type="int" Nullable="false" />
-          <Property Name="full_name" Type="varchar" MaxLength="100" />
-          <Property Name="position" Type="varchar" MaxLength="50" />
-          <Property Name="contact_info" Type="varchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="Fleet">
-          <Key>
-            <PropertyRef Name="vehicle_id" />
-          </Key>
-          <Property Name="vehicle_id" Type="int" Nullable="false" />
-          <Property Name="brand" Type="varchar" MaxLength="50" />
-          <Property Name="model" Type="varchar" MaxLength="50" />
-          <Property Name="year" Type="int" />
-          <Property Name="license_plate" Type="varchar" MaxLength="10" />
-          <Property Name="condition" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Maintenance_Events">
-          <Key>
-            <PropertyRef Name="event_id" />
-          </Key>
-          <Property Name="event_id" Type="int" Nullable="false" />
-          <Property Name="date" Type="datetime" />
-          <Property Name="description" Type="text" />
-          <Property Name="vehicle_id" Type="int" />
-        </EntityType>
-        <EntityType Name="Payments">
-          <Key>
-            <PropertyRef Name="payment_id" />
-          </Key>
-          <Property Name="payment_id" Type="int" Nullable="false" />
-          <Property Name="amount" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="payment_datetime" Type="datetime" />
-          <Property Name="payment_method" Type="varchar" MaxLength="50" />
-          <Property Name="trip_id" Type="int" />
-          <Property Name="client_id" Type="int" />
-        </EntityType>
+      <Schema Namespace="Хранилище dbCarsharingModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -74,235 +15,328 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
-        <EntityType Name="Tariffs">
+        <EntityType Name="Автомобили">
           <Key>
-            <PropertyRef Name="tariff_id" />
+            <PropertyRef Name="ID_Автомобиля" />
           </Key>
-          <Property Name="tariff_id" Type="int" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="50" />
-          <Property Name="cost" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="conditions" Type="text" />
+          <Property Name="ID_Автомобиля" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Модель" Type="varchar" MaxLength="100" />
+          <Property Name="Год_Выпуска" Type="int" />
+          <Property Name="VIN_Номер" Type="varchar" MaxLength="17" />
+          <Property Name="ID_Тарифа" Type="int" />
+          <Property Name="Описание" Type="varchar" MaxLength="50" />
         </EntityType>
-        <EntityType Name="Trips">
+        <EntityType Name="ДТП">
           <Key>
-            <PropertyRef Name="trip_id" />
+            <PropertyRef Name="ID_ДТП" />
           </Key>
-          <Property Name="trip_id" Type="int" Nullable="false" />
-          <Property Name="start_datetime" Type="datetime" />
-          <Property Name="end_datetime" Type="datetime" />
-          <Property Name="location" Type="varchar" MaxLength="100" />
-          <Property Name="cost" Type="decimal" Precision="10" Scale="2" />
-          <Property Name="client_id" Type="int" />
-          <Property Name="vehicle_id" Type="int" />
+          <Property Name="ID_ДТП" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Автомобиля" Type="int" />
+          <Property Name="ID_Клиента" Type="int" />
+          <Property Name="Дата" Type="date" />
+          <Property Name="Описание" Type="varchar" MaxLength="250" />
         </EntityType>
-        <EntityType Name="Vehicle_Coordinates">
+        <EntityType Name="Категории_Тех_Обслуживания">
           <Key>
-            <PropertyRef Name="coordinate_id" />
+            <PropertyRef Name="ID_Категории_Тех_Обслуживание" />
           </Key>
-          <Property Name="coordinate_id" Type="int" Nullable="false" />
-          <Property Name="latitude" Type="decimal" Precision="10" Scale="6" />
-          <Property Name="longitude" Type="decimal" Precision="10" Scale="6" />
-          <Property Name="update_datetime" Type="datetime" />
-          <Property Name="vehicle_id" Type="int" />
+          <Property Name="ID_Категории_Тех_Обслуживание" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="varchar" MaxLength="50" />
+          <Property Name="Описание" Type="varchar" MaxLength="150" />
         </EntityType>
-        <Association Name="FK__Accidents__vehic__5812160E">
-          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
-          <End Role="Accidents" Type="Self.Accidents" Multiplicity="*" />
+        <EntityType Name="Клиенты">
+          <Key>
+            <PropertyRef Name="ID_Клиента" />
+          </Key>
+          <Property Name="ID_Клиента" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ФИО" Type="varchar" MaxLength="150" />
+          <Property Name="Дата_Рождения" Type="date" />
+          <Property Name="Телефон" Type="varchar" MaxLength="16" />
+          <Property Name="Почта" Type="varchar" MaxLength="75" />
+          <Property Name="Номер_ВУ" Type="varchar" MaxLength="10" />
+          <Property Name="Дата_Выдачи_ВУ" Type="date" />
+          <Property Name="НомерСерия_Паспорта" Type="varchar" MaxLength="12" />
+        </EntityType>
+        <EntityType Name="Локации_Парковочных_Мест">
+          <Key>
+            <PropertyRef Name="ID_Локации" />
+          </Key>
+          <Property Name="ID_Локации" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Долгота" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="Широта" Type="decimal" Precision="9" Scale="6" />
+          <Property Name="Описание" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Оплата">
+          <Key>
+            <PropertyRef Name="ID_Оплаты" />
+          </Key>
+          <Property Name="ID_Оплаты" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Поездки" Type="int" />
+          <Property Name="ДатаВремя" Type="datetime" />
+          <Property Name="Стоимость" Type="money" />
+        </EntityType>
+        <EntityType Name="Поездки">
+          <Key>
+            <PropertyRef Name="ID_Поездки" />
+          </Key>
+          <Property Name="ID_Поездки" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Клиента" Type="int" />
+          <Property Name="ID_Автомобиля" Type="int" />
+          <Property Name="ID_Тарифа" Type="int" />
+          <Property Name="ДатаВремя_Начала" Type="datetime" />
+          <Property Name="ДатаВремя_Конца" Type="datetime" />
+          <Property Name="ID_Локации_Начала" Type="int" />
+          <Property Name="ID_Локации_Конца" Type="int" />
+          <Property Name="Стоимость" Type="money" />
+        </EntityType>
+        <EntityType Name="Статус_Автомобиля">
+          <Key>
+            <PropertyRef Name="ID_Автомобиля" />
+          </Key>
+          <Property Name="ID_Автомобиля" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ДатаВремя_Измения" Type="datetime" />
+          <Property Name="Описание" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Страховые_Данные">
+          <Key>
+            <PropertyRef Name="ID_Страховки" />
+          </Key>
+          <Property Name="ID_Страховки" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="ID_Автомобиля" Type="int" />
+          <Property Name="ДатаНачалаСтрахования" Type="date" />
+          <Property Name="ДатаКонцаСтрахования" Type="date" />
+        </EntityType>
+        <EntityType Name="Тарифы">
+          <Key>
+            <PropertyRef Name="ID_Тарифа" />
+          </Key>
+          <Property Name="ID_Тарифа" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Наименование" Type="varchar" MaxLength="50" />
+          <Property Name="Стоимость" Type="decimal" Precision="8" Scale="2" />
+          <Property Name="Мин_Стаж" Type="int" />
+          <Property Name="Мин_Возраст" Type="int" />
+        </EntityType>
+        <EntityType Name="Техническое_Обслуживание">
+          <Key>
+            <PropertyRef Name="ID_Тех_Обслуживания" />
+          </Key>
+          <Property Name="ID_Тех_Обслуживания" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Автомобиля" Type="int" />
+          <Property Name="ID_Категории_Тех_Обслуживания" Type="int" />
+          <Property Name="Дата" Type="date" />
+          <Property Name="Описание" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK_ДТП_Автомобили">
+          <End Role="Автомобили" Type="Self.Автомобили" Multiplicity="0..1" />
+          <End Role="ДТП" Type="Self.ДТП" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Fleet">
-              <PropertyRef Name="vehicle_id" />
+            <Principal Role="Автомобили">
+              <PropertyRef Name="ID_Автомобиля" />
             </Principal>
-            <Dependent Role="Accidents">
-              <PropertyRef Name="vehicle_id" />
+            <Dependent Role="ДТП">
+              <PropertyRef Name="ID_Автомобиля" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Maintenan__vehic__5535A963">
-          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
-          <End Role="Maintenance_Events" Type="Self.Maintenance_Events" Multiplicity="*" />
+        <Association Name="FK_ДТП_Клиенты">
+          <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="0..1" />
+          <End Role="ДТП" Type="Self.ДТП" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Fleet">
-              <PropertyRef Name="vehicle_id" />
+            <Principal Role="Клиенты">
+              <PropertyRef Name="ID_Клиента" />
             </Principal>
-            <Dependent Role="Maintenance_Events">
-              <PropertyRef Name="vehicle_id" />
+            <Dependent Role="ДТП">
+              <PropertyRef Name="ID_Клиента" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Payments__client__5EBF139D">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
-          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+        <Association Name="FK_Оплата_Поездки">
+          <End Role="Поездки" Type="Self.Поездки" Multiplicity="0..1" />
+          <End Role="Оплата" Type="Self.Оплата" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="client_id" />
+            <Principal Role="Поездки">
+              <PropertyRef Name="ID_Поездки" />
             </Principal>
-            <Dependent Role="Payments">
-              <PropertyRef Name="client_id" />
+            <Dependent Role="Оплата">
+              <PropertyRef Name="ID_Поездки" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Payments__trip_i__5DCAEF64">
-          <End Role="Trips" Type="Self.Trips" Multiplicity="0..1" />
-          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+        <Association Name="FK_Поездки_Автомобили">
+          <End Role="Автомобили" Type="Self.Автомобили" Multiplicity="0..1" />
+          <End Role="Поездки" Type="Self.Поездки" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Trips">
-              <PropertyRef Name="trip_id" />
+            <Principal Role="Автомобили">
+              <PropertyRef Name="ID_Автомобиля" />
             </Principal>
-            <Dependent Role="Payments">
-              <PropertyRef Name="trip_id" />
+            <Dependent Role="Поездки">
+              <PropertyRef Name="ID_Автомобиля" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Trips__client_id__4F7CD00D">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
-          <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+        <Association Name="FK_Поездки_Клиенты">
+          <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="0..1" />
+          <End Role="Поездки" Type="Self.Поездки" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="client_id" />
+            <Principal Role="Клиенты">
+              <PropertyRef Name="ID_Клиента" />
             </Principal>
-            <Dependent Role="Trips">
-              <PropertyRef Name="client_id" />
+            <Dependent Role="Поездки">
+              <PropertyRef Name="ID_Клиента" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Trips__vehicle_i__5070F446">
-          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
-          <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+        <Association Name="FK_Поездки_Локации_Парковочных_Мест">
+          <End Role="Локации_Парковочных_Мест" Type="Self.Локации_Парковочных_Мест" Multiplicity="0..1" />
+          <End Role="Поездки" Type="Self.Поездки" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Fleet">
-              <PropertyRef Name="vehicle_id" />
+            <Principal Role="Локации_Парковочных_Мест">
+              <PropertyRef Name="ID_Локации" />
             </Principal>
-            <Dependent Role="Trips">
-              <PropertyRef Name="vehicle_id" />
+            <Dependent Role="Поездки">
+              <PropertyRef Name="ID_Локации_Начала" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Vehicle_C__vehic__5AEE82B9">
-          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
-          <End Role="Vehicle_Coordinates" Type="Self.Vehicle_Coordinates" Multiplicity="*" />
+        <Association Name="FK_Поездки_Локации_Парковочных_Мест1">
+          <End Role="Локации_Парковочных_Мест" Type="Self.Локации_Парковочных_Мест" Multiplicity="0..1" />
+          <End Role="Поездки" Type="Self.Поездки" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Fleet">
-              <PropertyRef Name="vehicle_id" />
+            <Principal Role="Локации_Парковочных_Мест">
+              <PropertyRef Name="ID_Локации" />
             </Principal>
-            <Dependent Role="Vehicle_Coordinates">
-              <PropertyRef Name="vehicle_id" />
+            <Dependent Role="Поездки">
+              <PropertyRef Name="ID_Локации_Конца" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище CarsharingModelContainer">
-          <EntitySet Name="Accidents" EntityType="Self.Accidents" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Fleet" EntityType="Self.Fleet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Maintenance_Events" EntityType="Self.Maintenance_Events" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+        <Association Name="FK_Поездки_Тарифы">
+          <End Role="Тарифы" Type="Self.Тарифы" Multiplicity="0..1" />
+          <End Role="Поездки" Type="Self.Поездки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тарифы">
+              <PropertyRef Name="ID_Тарифа" />
+            </Principal>
+            <Dependent Role="Поездки">
+              <PropertyRef Name="ID_Тарифа" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Статус_Автомобиля_Автомобили">
+          <End Role="Автомобили" Type="Self.Автомобили" Multiplicity="1" />
+          <End Role="Статус_Автомобиля" Type="Self.Статус_Автомобиля" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Автомобили">
+              <PropertyRef Name="ID_Автомобиля" />
+            </Principal>
+            <Dependent Role="Статус_Автомобиля">
+              <PropertyRef Name="ID_Автомобиля" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Страховые_Данные_Автомобили">
+          <End Role="Автомобили" Type="Self.Автомобили" Multiplicity="0..1" />
+          <End Role="Страховые_Данные" Type="Self.Страховые_Данные" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Автомобили">
+              <PropertyRef Name="ID_Автомобиля" />
+            </Principal>
+            <Dependent Role="Страховые_Данные">
+              <PropertyRef Name="ID_Автомобиля" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Техническое_Обслуживание_Автомобили">
+          <End Role="Автомобили" Type="Self.Автомобили" Multiplicity="0..1" />
+          <End Role="Техническое_Обслуживание" Type="Self.Техническое_Обслуживание" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Автомобили">
+              <PropertyRef Name="ID_Автомобиля" />
+            </Principal>
+            <Dependent Role="Техническое_Обслуживание">
+              <PropertyRef Name="ID_Автомобиля" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Техническое_Обслуживание_Категории_Тех_Обслуживания">
+          <End Role="Категории_Тех_Обслуживания" Type="Self.Категории_Тех_Обслуживания" Multiplicity="0..1" />
+          <End Role="Техническое_Обслуживание" Type="Self.Техническое_Обслуживание" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Категории_Тех_Обслуживания">
+              <PropertyRef Name="ID_Категории_Тех_Обслуживание" />
+            </Principal>
+            <Dependent Role="Техническое_Обслуживание">
+              <PropertyRef Name="ID_Категории_Тех_Обслуживания" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище dbCarsharingModelContainer">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Tariffs" EntityType="Self.Tariffs" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Trips" EntityType="Self.Trips" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Vehicle_Coordinates" EntityType="Self.Vehicle_Coordinates" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Accidents__vehic__5812160E" Association="Self.FK__Accidents__vehic__5812160E">
-            <End Role="Fleet" EntitySet="Fleet" />
-            <End Role="Accidents" EntitySet="Accidents" />
+          <EntitySet Name="Автомобили" EntityType="Self.Автомобили" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ДТП" EntityType="Self.ДТП" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Категории_Тех_Обслуживания" EntityType="Self.Категории_Тех_Обслуживания" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Клиенты" EntityType="Self.Клиенты" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Локации_Парковочных_Мест" EntityType="Self.Локации_Парковочных_Мест" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Оплата" EntityType="Self.Оплата" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Поездки" EntityType="Self.Поездки" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Статус_Автомобиля" EntityType="Self.Статус_Автомобиля" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Страховые_Данные" EntityType="Self.Страховые_Данные" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Тарифы" EntityType="Self.Тарифы" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Техническое_Обслуживание" EntityType="Self.Техническое_Обслуживание" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ДТП_Автомобили" Association="Self.FK_ДТП_Автомобили">
+            <End Role="Автомобили" EntitySet="Автомобили" />
+            <End Role="ДТП" EntitySet="ДТП" />
           </AssociationSet>
-          <AssociationSet Name="FK__Maintenan__vehic__5535A963" Association="Self.FK__Maintenan__vehic__5535A963">
-            <End Role="Fleet" EntitySet="Fleet" />
-            <End Role="Maintenance_Events" EntitySet="Maintenance_Events" />
+          <AssociationSet Name="FK_ДТП_Клиенты" Association="Self.FK_ДТП_Клиенты">
+            <End Role="Клиенты" EntitySet="Клиенты" />
+            <End Role="ДТП" EntitySet="ДТП" />
           </AssociationSet>
-          <AssociationSet Name="FK__Payments__client__5EBF139D" Association="Self.FK__Payments__client__5EBF139D">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Payments" EntitySet="Payments" />
+          <AssociationSet Name="FK_Оплата_Поездки" Association="Self.FK_Оплата_Поездки">
+            <End Role="Поездки" EntitySet="Поездки" />
+            <End Role="Оплата" EntitySet="Оплата" />
           </AssociationSet>
-          <AssociationSet Name="FK__Payments__trip_i__5DCAEF64" Association="Self.FK__Payments__trip_i__5DCAEF64">
-            <End Role="Trips" EntitySet="Trips" />
-            <End Role="Payments" EntitySet="Payments" />
+          <AssociationSet Name="FK_Поездки_Автомобили" Association="Self.FK_Поездки_Автомобили">
+            <End Role="Автомобили" EntitySet="Автомобили" />
+            <End Role="Поездки" EntitySet="Поездки" />
           </AssociationSet>
-          <AssociationSet Name="FK__Trips__client_id__4F7CD00D" Association="Self.FK__Trips__client_id__4F7CD00D">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Trips" EntitySet="Trips" />
+          <AssociationSet Name="FK_Поездки_Клиенты" Association="Self.FK_Поездки_Клиенты">
+            <End Role="Клиенты" EntitySet="Клиенты" />
+            <End Role="Поездки" EntitySet="Поездки" />
           </AssociationSet>
-          <AssociationSet Name="FK__Trips__vehicle_i__5070F446" Association="Self.FK__Trips__vehicle_i__5070F446">
-            <End Role="Fleet" EntitySet="Fleet" />
-            <End Role="Trips" EntitySet="Trips" />
+          <AssociationSet Name="FK_Поездки_Локации_Парковочных_Мест" Association="Self.FK_Поездки_Локации_Парковочных_Мест">
+            <End Role="Локации_Парковочных_Мест" EntitySet="Локации_Парковочных_Мест" />
+            <End Role="Поездки" EntitySet="Поездки" />
           </AssociationSet>
-          <AssociationSet Name="FK__Vehicle_C__vehic__5AEE82B9" Association="Self.FK__Vehicle_C__vehic__5AEE82B9">
-            <End Role="Fleet" EntitySet="Fleet" />
-            <End Role="Vehicle_Coordinates" EntitySet="Vehicle_Coordinates" />
+          <AssociationSet Name="FK_Поездки_Локации_Парковочных_Мест1" Association="Self.FK_Поездки_Локации_Парковочных_Мест1">
+            <End Role="Локации_Парковочных_Мест" EntitySet="Локации_Парковочных_Мест" />
+            <End Role="Поездки" EntitySet="Поездки" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Поездки_Тарифы" Association="Self.FK_Поездки_Тарифы">
+            <End Role="Тарифы" EntitySet="Тарифы" />
+            <End Role="Поездки" EntitySet="Поездки" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Статус_Автомобиля_Автомобили" Association="Self.FK_Статус_Автомобиля_Автомобили">
+            <End Role="Автомобили" EntitySet="Автомобили" />
+            <End Role="Статус_Автомобиля" EntitySet="Статус_Автомобиля" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Страховые_Данные_Автомобили" Association="Self.FK_Страховые_Данные_Автомобили">
+            <End Role="Автомобили" EntitySet="Автомобили" />
+            <End Role="Страховые_Данные" EntitySet="Страховые_Данные" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Техническое_Обслуживание_Автомобили" Association="Self.FK_Техническое_Обслуживание_Автомобили">
+            <End Role="Автомобили" EntitySet="Автомобили" />
+            <End Role="Техническое_Обслуживание" EntitySet="Техническое_Обслуживание" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Техническое_Обслуживание_Категории_Тех_Обслуживания" Association="Self.FK_Техническое_Обслуживание_Категории_Тех_Обслуживания">
+            <End Role="Категории_Тех_Обслуживания" EntitySet="Категории_Тех_Обслуживания" />
+            <End Role="Техническое_Обслуживание" EntitySet="Техническое_Обслуживание" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="CarsharingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Accidents">
-          <Key>
-            <PropertyRef Name="accident_id" />
-          </Key>
-          <Property Name="accident_id" Type="Int32" Nullable="false" />
-          <Property Name="date" Type="DateTime" Precision="3" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="vehicle_id" Type="Int32" />
-          <NavigationProperty Name="Fleet" Relationship="Self.FK__Accidents__vehic__5812160E" FromRole="Accidents" ToRole="Fleet" />
-        </EntityType>
-        <EntityType Name="Clients">
-          <Key>
-            <PropertyRef Name="client_id" />
-          </Key>
-          <Property Name="client_id" Type="Int32" Nullable="false" />
-          <Property Name="full_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="contact_info" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="driver_license" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="passport" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__client__5EBF139D" FromRole="Clients" ToRole="Payments" />
-          <NavigationProperty Name="Trips" Relationship="Self.FK__Trips__client_id__4F7CD00D" FromRole="Clients" ToRole="Trips" />
-        </EntityType>
-        <EntityType Name="Employees">
-          <Key>
-            <PropertyRef Name="employee_id" />
-          </Key>
-          <Property Name="employee_id" Type="Int32" Nullable="false" />
-          <Property Name="full_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="position" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="contact_info" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Fleet">
-          <Key>
-            <PropertyRef Name="vehicle_id" />
-          </Key>
-          <Property Name="vehicle_id" Type="Int32" Nullable="false" />
-          <Property Name="brand" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="model" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="year" Type="Int32" />
-          <Property Name="license_plate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="condition" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Accidents" Relationship="Self.FK__Accidents__vehic__5812160E" FromRole="Fleet" ToRole="Accidents" />
-          <NavigationProperty Name="Maintenance_Events" Relationship="Self.FK__Maintenan__vehic__5535A963" FromRole="Fleet" ToRole="Maintenance_Events" />
-          <NavigationProperty Name="Trips" Relationship="Self.FK__Trips__vehicle_i__5070F446" FromRole="Fleet" ToRole="Trips" />
-          <NavigationProperty Name="Vehicle_Coordinates" Relationship="Self.FK__Vehicle_C__vehic__5AEE82B9" FromRole="Fleet" ToRole="Vehicle_Coordinates" />
-        </EntityType>
-        <EntityType Name="Maintenance_Events">
-          <Key>
-            <PropertyRef Name="event_id" />
-          </Key>
-          <Property Name="event_id" Type="Int32" Nullable="false" />
-          <Property Name="date" Type="DateTime" Precision="3" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="vehicle_id" Type="Int32" />
-          <NavigationProperty Name="Fleet" Relationship="Self.FK__Maintenan__vehic__5535A963" FromRole="Maintenance_Events" ToRole="Fleet" />
-        </EntityType>
-        <EntityType Name="Payments">
-          <Key>
-            <PropertyRef Name="payment_id" />
-          </Key>
-          <Property Name="payment_id" Type="Int32" Nullable="false" />
-          <Property Name="amount" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="payment_datetime" Type="DateTime" Precision="3" />
-          <Property Name="payment_method" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="trip_id" Type="Int32" />
-          <Property Name="client_id" Type="Int32" />
-          <NavigationProperty Name="Clients" Relationship="Self.FK__Payments__client__5EBF139D" FromRole="Payments" ToRole="Clients" />
-          <NavigationProperty Name="Trips" Relationship="Self.FK__Payments__trip_i__5DCAEF64" FromRole="Payments" ToRole="Trips" />
-        </EntityType>
+      <Schema Namespace="dbCarsharingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -313,163 +347,345 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
-        <EntityType Name="Tariffs">
+        <EntityType Name="Автомобили">
           <Key>
-            <PropertyRef Name="tariff_id" />
+            <PropertyRef Name="ID_Автомобиля" />
           </Key>
-          <Property Name="tariff_id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cost" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="conditions" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Автомобиля" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Модель" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Год_Выпуска" Type="Int32" />
+          <Property Name="VIN_Номер" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
+          <Property Name="ID_Тарифа" Type="Int32" />
+          <Property Name="Описание" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ДТП" Relationship="Self.FK_ДТП_Автомобили" FromRole="Автомобили" ToRole="ДТП" />
+          <NavigationProperty Name="Поездки" Relationship="Self.FK_Поездки_Автомобили" FromRole="Автомобили" ToRole="Поездки" />
+          <NavigationProperty Name="Статус_Автомобиля" Relationship="Self.FK_Статус_Автомобиля_Автомобили" FromRole="Автомобили" ToRole="Статус_Автомобиля" />
+          <NavigationProperty Name="Страховые_Данные" Relationship="Self.FK_Страховые_Данные_Автомобили" FromRole="Автомобили" ToRole="Страховые_Данные" />
+          <NavigationProperty Name="Техническое_Обслуживание" Relationship="Self.FK_Техническое_Обслуживание_Автомобили" FromRole="Автомобили" ToRole="Техническое_Обслуживание" />
         </EntityType>
-        <EntityType Name="Trips">
+        <EntityType Name="ДТП">
           <Key>
-            <PropertyRef Name="trip_id" />
+            <PropertyRef Name="ID_ДТП" />
           </Key>
-          <Property Name="trip_id" Type="Int32" Nullable="false" />
-          <Property Name="start_datetime" Type="DateTime" Precision="3" />
-          <Property Name="end_datetime" Type="DateTime" Precision="3" />
-          <Property Name="location" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="cost" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="client_id" Type="Int32" />
-          <Property Name="vehicle_id" Type="Int32" />
-          <NavigationProperty Name="Clients" Relationship="Self.FK__Trips__client_id__4F7CD00D" FromRole="Trips" ToRole="Clients" />
-          <NavigationProperty Name="Fleet" Relationship="Self.FK__Trips__vehicle_i__5070F446" FromRole="Trips" ToRole="Fleet" />
-          <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__trip_i__5DCAEF64" FromRole="Trips" ToRole="Payments" />
+          <Property Name="ID_ДТП" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Автомобиля" Type="Int32" />
+          <Property Name="ID_Клиента" Type="Int32" />
+          <Property Name="Дата" Type="DateTime" Precision="0" />
+          <Property Name="Описание" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Автомобили" Relationship="Self.FK_ДТП_Автомобили" FromRole="ДТП" ToRole="Автомобили" />
+          <NavigationProperty Name="Клиенты" Relationship="Self.FK_ДТП_Клиенты" FromRole="ДТП" ToRole="Клиенты" />
         </EntityType>
-        <EntityType Name="Vehicle_Coordinates">
+        <EntityType Name="Категории_Тех_Обслуживания">
           <Key>
-            <PropertyRef Name="coordinate_id" />
+            <PropertyRef Name="ID_Категории_Тех_Обслуживание" />
           </Key>
-          <Property Name="coordinate_id" Type="Int32" Nullable="false" />
-          <Property Name="latitude" Type="Decimal" Precision="10" Scale="6" />
-          <Property Name="longitude" Type="Decimal" Precision="10" Scale="6" />
-          <Property Name="update_datetime" Type="DateTime" Precision="3" />
-          <Property Name="vehicle_id" Type="Int32" />
-          <NavigationProperty Name="Fleet" Relationship="Self.FK__Vehicle_C__vehic__5AEE82B9" FromRole="Vehicle_Coordinates" ToRole="Fleet" />
+          <Property Name="ID_Категории_Тех_Обслуживание" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Описание" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Техническое_Обслуживание" Relationship="Self.FK_Техническое_Обслуживание_Категории_Тех_Обслуживания" FromRole="Категории_Тех_Обслуживания" ToRole="Техническое_Обслуживание" />
         </EntityType>
-        <Association Name="FK__Accidents__vehic__5812160E">
-          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
-          <End Role="Accidents" Type="Self.Accidents" Multiplicity="*" />
+        <EntityType Name="Клиенты">
+          <Key>
+            <PropertyRef Name="ID_Клиента" />
+          </Key>
+          <Property Name="ID_Клиента" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ФИО" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Дата_Рождения" Type="DateTime" Precision="0" />
+          <Property Name="Телефон" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Почта" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="Номер_ВУ" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Дата_Выдачи_ВУ" Type="DateTime" Precision="0" />
+          <Property Name="НомерСерия_Паспорта" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ДТП" Relationship="Self.FK_ДТП_Клиенты" FromRole="Клиенты" ToRole="ДТП" />
+          <NavigationProperty Name="Поездки" Relationship="Self.FK_Поездки_Клиенты" FromRole="Клиенты" ToRole="Поездки" />
+        </EntityType>
+        <EntityType Name="Локации_Парковочных_Мест">
+          <Key>
+            <PropertyRef Name="ID_Локации" />
+          </Key>
+          <Property Name="ID_Локации" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Долгота" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="Широта" Type="Decimal" Precision="9" Scale="6" />
+          <Property Name="Описание" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Поездки" Relationship="Self.FK_Поездки_Локации_Парковочных_Мест" FromRole="Локации_Парковочных_Мест" ToRole="Поездки" />
+          <NavigationProperty Name="Поездки1" Relationship="Self.FK_Поездки_Локации_Парковочных_Мест1" FromRole="Локации_Парковочных_Мест" ToRole="Поездки" />
+        </EntityType>
+        <EntityType Name="Оплата">
+          <Key>
+            <PropertyRef Name="ID_Оплаты" />
+          </Key>
+          <Property Name="ID_Оплаты" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Поездки" Type="Int32" />
+          <Property Name="ДатаВремя" Type="DateTime" Precision="3" />
+          <Property Name="Стоимость" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Поездки" Relationship="Self.FK_Оплата_Поездки" FromRole="Оплата" ToRole="Поездки" />
+        </EntityType>
+        <EntityType Name="Поездки">
+          <Key>
+            <PropertyRef Name="ID_Поездки" />
+          </Key>
+          <Property Name="ID_Поездки" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Клиента" Type="Int32" />
+          <Property Name="ID_Автомобиля" Type="Int32" />
+          <Property Name="ID_Тарифа" Type="Int32" />
+          <Property Name="ДатаВремя_Начала" Type="DateTime" Precision="3" />
+          <Property Name="ДатаВремя_Конца" Type="DateTime" Precision="3" />
+          <Property Name="ID_Локации_Начала" Type="Int32" />
+          <Property Name="ID_Локации_Конца" Type="Int32" />
+          <Property Name="Стоимость" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="Автомобили" Relationship="Self.FK_Поездки_Автомобили" FromRole="Поездки" ToRole="Автомобили" />
+          <NavigationProperty Name="Клиенты" Relationship="Self.FK_Поездки_Клиенты" FromRole="Поездки" ToRole="Клиенты" />
+          <NavigationProperty Name="Локации_Парковочных_Мест" Relationship="Self.FK_Поездки_Локации_Парковочных_Мест" FromRole="Поездки" ToRole="Локации_Парковочных_Мест" />
+          <NavigationProperty Name="Локации_Парковочных_Мест1" Relationship="Self.FK_Поездки_Локации_Парковочных_Мест1" FromRole="Поездки" ToRole="Локации_Парковочных_Мест" />
+          <NavigationProperty Name="Оплата" Relationship="Self.FK_Оплата_Поездки" FromRole="Поездки" ToRole="Оплата" />
+          <NavigationProperty Name="Тарифы" Relationship="Self.FK_Поездки_Тарифы" FromRole="Поездки" ToRole="Тарифы" />
+        </EntityType>
+        <EntityType Name="Статус_Автомобиля">
+          <Key>
+            <PropertyRef Name="ID_Автомобиля" />
+          </Key>
+          <Property Name="ID_Автомобиля" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ДатаВремя_Измения" Type="DateTime" Precision="3" />
+          <Property Name="Описание" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Автомобили" Relationship="Self.FK_Статус_Автомобиля_Автомобили" FromRole="Статус_Автомобиля" ToRole="Автомобили" />
+        </EntityType>
+        <EntityType Name="Страховые_Данные">
+          <Key>
+            <PropertyRef Name="ID_Страховки" />
+          </Key>
+          <Property Name="ID_Страховки" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Автомобиля" Type="Int32" />
+          <Property Name="ДатаНачалаСтрахования" Type="DateTime" Precision="0" />
+          <Property Name="ДатаКонцаСтрахования" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Автомобили" Relationship="Self.FK_Страховые_Данные_Автомобили" FromRole="Страховые_Данные" ToRole="Автомобили" />
+        </EntityType>
+        <EntityType Name="Тарифы">
+          <Key>
+            <PropertyRef Name="ID_Тарифа" />
+          </Key>
+          <Property Name="ID_Тарифа" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Наименование" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Стоимость" Type="Decimal" Precision="8" Scale="2" />
+          <Property Name="Мин_Стаж" Type="Int32" />
+          <Property Name="Мин_Возраст" Type="Int32" />
+          <NavigationProperty Name="Поездки" Relationship="Self.FK_Поездки_Тарифы" FromRole="Тарифы" ToRole="Поездки" />
+        </EntityType>
+        <EntityType Name="Техническое_Обслуживание">
+          <Key>
+            <PropertyRef Name="ID_Тех_Обслуживания" />
+          </Key>
+          <Property Name="ID_Тех_Обслуживания" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Автомобиля" Type="Int32" />
+          <Property Name="ID_Категории_Тех_Обслуживания" Type="Int32" />
+          <Property Name="Дата" Type="DateTime" Precision="0" />
+          <Property Name="Описание" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Автомобили" Relationship="Self.FK_Техническое_Обслуживание_Автомобили" FromRole="Техническое_Обслуживание" ToRole="Автомобили" />
+          <NavigationProperty Name="Категории_Тех_Обслуживания" Relationship="Self.FK_Техническое_Обслуживание_Категории_Тех_Обслуживания" FromRole="Техническое_Обслуживание" ToRole="Категории_Тех_Обслуживания" />
+        </EntityType>
+        <Association Name="FK_ДТП_Автомобили">
+          <End Role="Автомобили" Type="Self.Автомобили" Multiplicity="0..1" />
+          <End Role="ДТП" Type="Self.ДТП" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Fleet">
-              <PropertyRef Name="vehicle_id" />
+            <Principal Role="Автомобили">
+              <PropertyRef Name="ID_Автомобиля" />
             </Principal>
-            <Dependent Role="Accidents">
-              <PropertyRef Name="vehicle_id" />
+            <Dependent Role="ДТП">
+              <PropertyRef Name="ID_Автомобиля" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Payments__client__5EBF139D">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
-          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+        <Association Name="FK_Поездки_Автомобили">
+          <End Role="Автомобили" Type="Self.Автомобили" Multiplicity="0..1" />
+          <End Role="Поездки" Type="Self.Поездки" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="client_id" />
+            <Principal Role="Автомобили">
+              <PropertyRef Name="ID_Автомобиля" />
             </Principal>
-            <Dependent Role="Payments">
-              <PropertyRef Name="client_id" />
+            <Dependent Role="Поездки">
+              <PropertyRef Name="ID_Автомобиля" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Trips__client_id__4F7CD00D">
-          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
-          <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+        <Association Name="FK_Статус_Автомобиля_Автомобили">
+          <End Role="Автомобили" Type="Self.Автомобили" Multiplicity="1" />
+          <End Role="Статус_Автомобиля" Type="Self.Статус_Автомобиля" Multiplicity="0..1" />
           <ReferentialConstraint>
-            <Principal Role="Clients">
-              <PropertyRef Name="client_id" />
+            <Principal Role="Автомобили">
+              <PropertyRef Name="ID_Автомобиля" />
             </Principal>
-            <Dependent Role="Trips">
-              <PropertyRef Name="client_id" />
+            <Dependent Role="Статус_Автомобиля">
+              <PropertyRef Name="ID_Автомобиля" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Maintenan__vehic__5535A963">
-          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
-          <End Role="Maintenance_Events" Type="Self.Maintenance_Events" Multiplicity="*" />
+        <Association Name="FK_Страховые_Данные_Автомобили">
+          <End Role="Автомобили" Type="Self.Автомобили" Multiplicity="0..1" />
+          <End Role="Страховые_Данные" Type="Self.Страховые_Данные" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Fleet">
-              <PropertyRef Name="vehicle_id" />
+            <Principal Role="Автомобили">
+              <PropertyRef Name="ID_Автомобиля" />
             </Principal>
-            <Dependent Role="Maintenance_Events">
-              <PropertyRef Name="vehicle_id" />
+            <Dependent Role="Страховые_Данные">
+              <PropertyRef Name="ID_Автомобиля" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Trips__vehicle_i__5070F446">
-          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
-          <End Role="Trips" Type="Self.Trips" Multiplicity="*" />
+        <Association Name="FK_Техническое_Обслуживание_Автомобили">
+          <End Role="Автомобили" Type="Self.Автомобили" Multiplicity="0..1" />
+          <End Role="Техническое_Обслуживание" Type="Self.Техническое_Обслуживание" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Fleet">
-              <PropertyRef Name="vehicle_id" />
+            <Principal Role="Автомобили">
+              <PropertyRef Name="ID_Автомобиля" />
             </Principal>
-            <Dependent Role="Trips">
-              <PropertyRef Name="vehicle_id" />
+            <Dependent Role="Техническое_Обслуживание">
+              <PropertyRef Name="ID_Автомобиля" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Vehicle_C__vehic__5AEE82B9">
-          <End Role="Fleet" Type="Self.Fleet" Multiplicity="0..1" />
-          <End Role="Vehicle_Coordinates" Type="Self.Vehicle_Coordinates" Multiplicity="*" />
+        <Association Name="FK_ДТП_Клиенты">
+          <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="0..1" />
+          <End Role="ДТП" Type="Self.ДТП" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Fleet">
-              <PropertyRef Name="vehicle_id" />
+            <Principal Role="Клиенты">
+              <PropertyRef Name="ID_Клиента" />
             </Principal>
-            <Dependent Role="Vehicle_Coordinates">
-              <PropertyRef Name="vehicle_id" />
+            <Dependent Role="ДТП">
+              <PropertyRef Name="ID_Клиента" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Payments__trip_i__5DCAEF64">
-          <End Role="Trips" Type="Self.Trips" Multiplicity="0..1" />
-          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+        <Association Name="FK_Техническое_Обслуживание_Категории_Тех_Обслуживания">
+          <End Role="Категории_Тех_Обслуживания" Type="Self.Категории_Тех_Обслуживания" Multiplicity="0..1" />
+          <End Role="Техническое_Обслуживание" Type="Self.Техническое_Обслуживание" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Trips">
-              <PropertyRef Name="trip_id" />
+            <Principal Role="Категории_Тех_Обслуживания">
+              <PropertyRef Name="ID_Категории_Тех_Обслуживание" />
             </Principal>
-            <Dependent Role="Payments">
-              <PropertyRef Name="trip_id" />
+            <Dependent Role="Техническое_Обслуживание">
+              <PropertyRef Name="ID_Категории_Тех_Обслуживания" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CarsharingEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Accidents" EntityType="Self.Accidents" />
-          <EntitySet Name="Clients" EntityType="Self.Clients" />
-          <EntitySet Name="Employees" EntityType="Self.Employees" />
-          <EntitySet Name="Fleet" EntityType="Self.Fleet" />
-          <EntitySet Name="Maintenance_Events" EntityType="Self.Maintenance_Events" />
-          <EntitySet Name="Payments" EntityType="Self.Payments" />
+        <Association Name="FK_Поездки_Клиенты">
+          <End Role="Клиенты" Type="Self.Клиенты" Multiplicity="0..1" />
+          <End Role="Поездки" Type="Self.Поездки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Клиенты">
+              <PropertyRef Name="ID_Клиента" />
+            </Principal>
+            <Dependent Role="Поездки">
+              <PropertyRef Name="ID_Клиента" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Поездки_Локации_Парковочных_Мест">
+          <End Role="Локации_Парковочных_Мест" Type="Self.Локации_Парковочных_Мест" Multiplicity="0..1" />
+          <End Role="Поездки" Type="Self.Поездки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Локации_Парковочных_Мест">
+              <PropertyRef Name="ID_Локации" />
+            </Principal>
+            <Dependent Role="Поездки">
+              <PropertyRef Name="ID_Локации_Начала" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Поездки_Локации_Парковочных_Мест1">
+          <End Role="Локации_Парковочных_Мест" Type="Self.Локации_Парковочных_Мест" Multiplicity="0..1" />
+          <End Role="Поездки" Type="Self.Поездки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Локации_Парковочных_Мест">
+              <PropertyRef Name="ID_Локации" />
+            </Principal>
+            <Dependent Role="Поездки">
+              <PropertyRef Name="ID_Локации_Конца" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Оплата_Поездки">
+          <End Role="Поездки" Type="Self.Поездки" Multiplicity="0..1" />
+          <End Role="Оплата" Type="Self.Оплата" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Поездки">
+              <PropertyRef Name="ID_Поездки" />
+            </Principal>
+            <Dependent Role="Оплата">
+              <PropertyRef Name="ID_Поездки" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Поездки_Тарифы">
+          <End Role="Тарифы" Type="Self.Тарифы" Multiplicity="0..1" />
+          <End Role="Поездки" Type="Self.Поездки" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тарифы">
+              <PropertyRef Name="ID_Тарифа" />
+            </Principal>
+            <Dependent Role="Поездки">
+              <PropertyRef Name="ID_Тарифа" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbCarsharing" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-          <EntitySet Name="Tariffs" EntityType="Self.Tariffs" />
-          <EntitySet Name="Trips" EntityType="Self.Trips" />
-          <EntitySet Name="Vehicle_Coordinates" EntityType="Self.Vehicle_Coordinates" />
-          <AssociationSet Name="FK__Accidents__vehic__5812160E" Association="Self.FK__Accidents__vehic__5812160E">
-            <End Role="Fleet" EntitySet="Fleet" />
-            <End Role="Accidents" EntitySet="Accidents" />
+          <EntitySet Name="Автомобили" EntityType="Self.Автомобили" />
+          <EntitySet Name="ДТП" EntityType="Self.ДТП" />
+          <EntitySet Name="Категории_Тех_Обслуживания" EntityType="Self.Категории_Тех_Обслуживания" />
+          <EntitySet Name="Клиенты" EntityType="Self.Клиенты" />
+          <EntitySet Name="Локации_Парковочных_Мест" EntityType="Self.Локации_Парковочных_Мест" />
+          <EntitySet Name="Оплата" EntityType="Self.Оплата" />
+          <EntitySet Name="Поездки" EntityType="Self.Поездки" />
+          <EntitySet Name="Статус_Автомобиля" EntityType="Self.Статус_Автомобиля" />
+          <EntitySet Name="Страховые_Данные" EntityType="Self.Страховые_Данные" />
+          <EntitySet Name="Тарифы" EntityType="Self.Тарифы" />
+          <EntitySet Name="Техническое_Обслуживание" EntityType="Self.Техническое_Обслуживание" />
+          <AssociationSet Name="FK_ДТП_Автомобили" Association="Self.FK_ДТП_Автомобили">
+            <End Role="Автомобили" EntitySet="Автомобили" />
+            <End Role="ДТП" EntitySet="ДТП" />
           </AssociationSet>
-          <AssociationSet Name="FK__Payments__client__5EBF139D" Association="Self.FK__Payments__client__5EBF139D">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Payments" EntitySet="Payments" />
+          <AssociationSet Name="FK_Поездки_Автомобили" Association="Self.FK_Поездки_Автомобили">
+            <End Role="Автомобили" EntitySet="Автомобили" />
+            <End Role="Поездки" EntitySet="Поездки" />
           </AssociationSet>
-          <AssociationSet Name="FK__Trips__client_id__4F7CD00D" Association="Self.FK__Trips__client_id__4F7CD00D">
-            <End Role="Clients" EntitySet="Clients" />
-            <End Role="Trips" EntitySet="Trips" />
+          <AssociationSet Name="FK_Статус_Автомобиля_Автомобили" Association="Self.FK_Статус_Автомобиля_Автомобили">
+            <End Role="Автомобили" EntitySet="Автомобили" />
+            <End Role="Статус_Автомобиля" EntitySet="Статус_Автомобиля" />
           </AssociationSet>
-          <AssociationSet Name="FK__Maintenan__vehic__5535A963" Association="Self.FK__Maintenan__vehic__5535A963">
-            <End Role="Fleet" EntitySet="Fleet" />
-            <End Role="Maintenance_Events" EntitySet="Maintenance_Events" />
+          <AssociationSet Name="FK_Страховые_Данные_Автомобили" Association="Self.FK_Страховые_Данные_Автомобили">
+            <End Role="Автомобили" EntitySet="Автомобили" />
+            <End Role="Страховые_Данные" EntitySet="Страховые_Данные" />
           </AssociationSet>
-          <AssociationSet Name="FK__Trips__vehicle_i__5070F446" Association="Self.FK__Trips__vehicle_i__5070F446">
-            <End Role="Fleet" EntitySet="Fleet" />
-            <End Role="Trips" EntitySet="Trips" />
+          <AssociationSet Name="FK_Техническое_Обслуживание_Автомобили" Association="Self.FK_Техническое_Обслуживание_Автомобили">
+            <End Role="Автомобили" EntitySet="Автомобили" />
+            <End Role="Техническое_Обслуживание" EntitySet="Техническое_Обслуживание" />
           </AssociationSet>
-          <AssociationSet Name="FK__Vehicle_C__vehic__5AEE82B9" Association="Self.FK__Vehicle_C__vehic__5AEE82B9">
-            <End Role="Fleet" EntitySet="Fleet" />
-            <End Role="Vehicle_Coordinates" EntitySet="Vehicle_Coordinates" />
+          <AssociationSet Name="FK_ДТП_Клиенты" Association="Self.FK_ДТП_Клиенты">
+            <End Role="Клиенты" EntitySet="Клиенты" />
+            <End Role="ДТП" EntitySet="ДТП" />
           </AssociationSet>
-          <AssociationSet Name="FK__Payments__trip_i__5DCAEF64" Association="Self.FK__Payments__trip_i__5DCAEF64">
-            <End Role="Trips" EntitySet="Trips" />
-            <End Role="Payments" EntitySet="Payments" />
+          <AssociationSet Name="FK_Техническое_Обслуживание_Категории_Тех_Обслуживания" Association="Self.FK_Техническое_Обслуживание_Категории_Тех_Обслуживания">
+            <End Role="Категории_Тех_Обслуживания" EntitySet="Категории_Тех_Обслуживания" />
+            <End Role="Техническое_Обслуживание" EntitySet="Техническое_Обслуживание" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Поездки_Клиенты" Association="Self.FK_Поездки_Клиенты">
+            <End Role="Клиенты" EntitySet="Клиенты" />
+            <End Role="Поездки" EntitySet="Поездки" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Поездки_Локации_Парковочных_Мест" Association="Self.FK_Поездки_Локации_Парковочных_Мест">
+            <End Role="Локации_Парковочных_Мест" EntitySet="Локации_Парковочных_Мест" />
+            <End Role="Поездки" EntitySet="Поездки" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Поездки_Локации_Парковочных_Мест1" Association="Self.FK_Поездки_Локации_Парковочных_Мест1">
+            <End Role="Локации_Парковочных_Мест" EntitySet="Локации_Парковочных_Мест" />
+            <End Role="Поездки" EntitySet="Поездки" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Оплата_Поездки" Association="Self.FK_Оплата_Поездки">
+            <End Role="Поездки" EntitySet="Поездки" />
+            <End Role="Оплата" EntitySet="Оплата" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Поездки_Тарифы" Association="Self.FK_Поездки_Тарифы">
+            <End Role="Тарифы" EntitySet="Тарифы" />
+            <End Role="Поездки" EntitySet="Поездки" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -477,74 +693,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище CarsharingModelContainer" CdmEntityContainer="CarsharingEntities">
-          <EntitySetMapping Name="Accidents">
-            <EntityTypeMapping TypeName="CarsharingModel.Accidents">
-              <MappingFragment StoreEntitySet="Accidents">
-                <ScalarProperty Name="accident_id" ColumnName="accident_id" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Clients">
-            <EntityTypeMapping TypeName="CarsharingModel.Clients">
-              <MappingFragment StoreEntitySet="Clients">
-                <ScalarProperty Name="client_id" ColumnName="client_id" />
-                <ScalarProperty Name="full_name" ColumnName="full_name" />
-                <ScalarProperty Name="contact_info" ColumnName="contact_info" />
-                <ScalarProperty Name="driver_license" ColumnName="driver_license" />
-                <ScalarProperty Name="passport" ColumnName="passport" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="CarsharingModel.Employees">
-              <MappingFragment StoreEntitySet="Employees">
-                <ScalarProperty Name="employee_id" ColumnName="employee_id" />
-                <ScalarProperty Name="full_name" ColumnName="full_name" />
-                <ScalarProperty Name="position" ColumnName="position" />
-                <ScalarProperty Name="contact_info" ColumnName="contact_info" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Fleet">
-            <EntityTypeMapping TypeName="CarsharingModel.Fleet">
-              <MappingFragment StoreEntitySet="Fleet">
-                <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
-                <ScalarProperty Name="brand" ColumnName="brand" />
-                <ScalarProperty Name="model" ColumnName="model" />
-                <ScalarProperty Name="year" ColumnName="year" />
-                <ScalarProperty Name="license_plate" ColumnName="license_plate" />
-                <ScalarProperty Name="condition" ColumnName="condition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Maintenance_Events">
-            <EntityTypeMapping TypeName="CarsharingModel.Maintenance_Events">
-              <MappingFragment StoreEntitySet="Maintenance_Events">
-                <ScalarProperty Name="event_id" ColumnName="event_id" />
-                <ScalarProperty Name="date" ColumnName="date" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Payments">
-            <EntityTypeMapping TypeName="CarsharingModel.Payments">
-              <MappingFragment StoreEntitySet="Payments">
-                <ScalarProperty Name="payment_id" ColumnName="payment_id" />
-                <ScalarProperty Name="amount" ColumnName="amount" />
-                <ScalarProperty Name="payment_datetime" ColumnName="payment_datetime" />
-                <ScalarProperty Name="payment_method" ColumnName="payment_method" />
-                <ScalarProperty Name="trip_id" ColumnName="trip_id" />
-                <ScalarProperty Name="client_id" ColumnName="client_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="Хранилище dbCarsharingModelContainer" CdmEntityContainer="dbCarsharing">
           <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="CarsharingModel.sysdiagrams">
+            <EntityTypeMapping TypeName="dbCarsharingModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
@@ -554,37 +705,125 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Tariffs">
-            <EntityTypeMapping TypeName="CarsharingModel.Tariffs">
-              <MappingFragment StoreEntitySet="Tariffs">
-                <ScalarProperty Name="tariff_id" ColumnName="tariff_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="cost" ColumnName="cost" />
-                <ScalarProperty Name="conditions" ColumnName="conditions" />
+          <EntitySetMapping Name="Автомобили">
+            <EntityTypeMapping TypeName="dbCarsharingModel.Автомобили">
+              <MappingFragment StoreEntitySet="Автомобили">
+                <ScalarProperty Name="ID_Автомобиля" ColumnName="ID_Автомобиля" />
+                <ScalarProperty Name="Модель" ColumnName="Модель" />
+                <ScalarProperty Name="Год_Выпуска" ColumnName="Год_Выпуска" />
+                <ScalarProperty Name="VIN_Номер" ColumnName="VIN_Номер" />
+                <ScalarProperty Name="ID_Тарифа" ColumnName="ID_Тарифа" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Trips">
-            <EntityTypeMapping TypeName="CarsharingModel.Trips">
-              <MappingFragment StoreEntitySet="Trips">
-                <ScalarProperty Name="trip_id" ColumnName="trip_id" />
-                <ScalarProperty Name="start_datetime" ColumnName="start_datetime" />
-                <ScalarProperty Name="end_datetime" ColumnName="end_datetime" />
-                <ScalarProperty Name="location" ColumnName="location" />
-                <ScalarProperty Name="cost" ColumnName="cost" />
-                <ScalarProperty Name="client_id" ColumnName="client_id" />
-                <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
+          <EntitySetMapping Name="ДТП">
+            <EntityTypeMapping TypeName="dbCarsharingModel.ДТП">
+              <MappingFragment StoreEntitySet="ДТП">
+                <ScalarProperty Name="ID_ДТП" ColumnName="ID_ДТП" />
+                <ScalarProperty Name="ID_Автомобиля" ColumnName="ID_Автомобиля" />
+                <ScalarProperty Name="ID_Клиента" ColumnName="ID_Клиента" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Vehicle_Coordinates">
-            <EntityTypeMapping TypeName="CarsharingModel.Vehicle_Coordinates">
-              <MappingFragment StoreEntitySet="Vehicle_Coordinates">
-                <ScalarProperty Name="coordinate_id" ColumnName="coordinate_id" />
-                <ScalarProperty Name="latitude" ColumnName="latitude" />
-                <ScalarProperty Name="longitude" ColumnName="longitude" />
-                <ScalarProperty Name="update_datetime" ColumnName="update_datetime" />
-                <ScalarProperty Name="vehicle_id" ColumnName="vehicle_id" />
+          <EntitySetMapping Name="Категории_Тех_Обслуживания">
+            <EntityTypeMapping TypeName="dbCarsharingModel.Категории_Тех_Обслуживания">
+              <MappingFragment StoreEntitySet="Категории_Тех_Обслуживания">
+                <ScalarProperty Name="ID_Категории_Тех_Обслуживание" ColumnName="ID_Категории_Тех_Обслуживание" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Клиенты">
+            <EntityTypeMapping TypeName="dbCarsharingModel.Клиенты">
+              <MappingFragment StoreEntitySet="Клиенты">
+                <ScalarProperty Name="ID_Клиента" ColumnName="ID_Клиента" />
+                <ScalarProperty Name="ФИО" ColumnName="ФИО" />
+                <ScalarProperty Name="Дата_Рождения" ColumnName="Дата_Рождения" />
+                <ScalarProperty Name="Телефон" ColumnName="Телефон" />
+                <ScalarProperty Name="Почта" ColumnName="Почта" />
+                <ScalarProperty Name="Номер_ВУ" ColumnName="Номер_ВУ" />
+                <ScalarProperty Name="Дата_Выдачи_ВУ" ColumnName="Дата_Выдачи_ВУ" />
+                <ScalarProperty Name="НомерСерия_Паспорта" ColumnName="НомерСерия_Паспорта" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Локации_Парковочных_Мест">
+            <EntityTypeMapping TypeName="dbCarsharingModel.Локации_Парковочных_Мест">
+              <MappingFragment StoreEntitySet="Локации_Парковочных_Мест">
+                <ScalarProperty Name="ID_Локации" ColumnName="ID_Локации" />
+                <ScalarProperty Name="Долгота" ColumnName="Долгота" />
+                <ScalarProperty Name="Широта" ColumnName="Широта" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Оплата">
+            <EntityTypeMapping TypeName="dbCarsharingModel.Оплата">
+              <MappingFragment StoreEntitySet="Оплата">
+                <ScalarProperty Name="ID_Оплаты" ColumnName="ID_Оплаты" />
+                <ScalarProperty Name="ID_Поездки" ColumnName="ID_Поездки" />
+                <ScalarProperty Name="ДатаВремя" ColumnName="ДатаВремя" />
+                <ScalarProperty Name="Стоимость" ColumnName="Стоимость" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Поездки">
+            <EntityTypeMapping TypeName="dbCarsharingModel.Поездки">
+              <MappingFragment StoreEntitySet="Поездки">
+                <ScalarProperty Name="ID_Поездки" ColumnName="ID_Поездки" />
+                <ScalarProperty Name="ID_Клиента" ColumnName="ID_Клиента" />
+                <ScalarProperty Name="ID_Автомобиля" ColumnName="ID_Автомобиля" />
+                <ScalarProperty Name="ID_Тарифа" ColumnName="ID_Тарифа" />
+                <ScalarProperty Name="ДатаВремя_Начала" ColumnName="ДатаВремя_Начала" />
+                <ScalarProperty Name="ДатаВремя_Конца" ColumnName="ДатаВремя_Конца" />
+                <ScalarProperty Name="ID_Локации_Начала" ColumnName="ID_Локации_Начала" />
+                <ScalarProperty Name="ID_Локации_Конца" ColumnName="ID_Локации_Конца" />
+                <ScalarProperty Name="Стоимость" ColumnName="Стоимость" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Статус_Автомобиля">
+            <EntityTypeMapping TypeName="dbCarsharingModel.Статус_Автомобиля">
+              <MappingFragment StoreEntitySet="Статус_Автомобиля">
+                <ScalarProperty Name="ID_Автомобиля" ColumnName="ID_Автомобиля" />
+                <ScalarProperty Name="ДатаВремя_Измения" ColumnName="ДатаВремя_Измения" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Страховые_Данные">
+            <EntityTypeMapping TypeName="dbCarsharingModel.Страховые_Данные">
+              <MappingFragment StoreEntitySet="Страховые_Данные">
+                <ScalarProperty Name="ID_Страховки" ColumnName="ID_Страховки" />
+                <ScalarProperty Name="ID_Автомобиля" ColumnName="ID_Автомобиля" />
+                <ScalarProperty Name="ДатаНачалаСтрахования" ColumnName="ДатаНачалаСтрахования" />
+                <ScalarProperty Name="ДатаКонцаСтрахования" ColumnName="ДатаКонцаСтрахования" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Тарифы">
+            <EntityTypeMapping TypeName="dbCarsharingModel.Тарифы">
+              <MappingFragment StoreEntitySet="Тарифы">
+                <ScalarProperty Name="ID_Тарифа" ColumnName="ID_Тарифа" />
+                <ScalarProperty Name="Наименование" ColumnName="Наименование" />
+                <ScalarProperty Name="Стоимость" ColumnName="Стоимость" />
+                <ScalarProperty Name="Мин_Стаж" ColumnName="Мин_Стаж" />
+                <ScalarProperty Name="Мин_Возраст" ColumnName="Мин_Возраст" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Техническое_Обслуживание">
+            <EntityTypeMapping TypeName="dbCarsharingModel.Техническое_Обслуживание">
+              <MappingFragment StoreEntitySet="Техническое_Обслуживание">
+                <ScalarProperty Name="ID_Тех_Обслуживания" ColumnName="ID_Тех_Обслуживания" />
+                <ScalarProperty Name="ID_Автомобиля" ColumnName="ID_Автомобиля" />
+                <ScalarProperty Name="ID_Категории_Тех_Обслуживания" ColumnName="ID_Категории_Тех_Обслуживания" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

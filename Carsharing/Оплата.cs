@@ -12,13 +12,13 @@ namespace Carsharing
     using System;
     using System.Collections.Generic;
     
-    public partial class Accidents
+    public partial class Оплата
     {
-        public int accident_id { get; set; }
-        public Nullable<System.DateTime> date { get; set; }
-        public string description { get; set; }
-        public Nullable<int> vehicle_id { get; set; }
+        public int ID_Оплаты { get; set; }
+        public Nullable<int> ID_Поездки { get; set; }
+        public Nullable<System.DateTime> ДатаВремя { get; set; }
+        public Nullable<decimal> Стоимость { get; set; }
     
-        public virtual Fleet Fleet { get; set; }
+        public virtual Поездки Поездки { get; set; }
     }
 }

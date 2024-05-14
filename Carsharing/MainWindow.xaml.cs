@@ -37,7 +37,7 @@ namespace Carsharing
             {
 
                 RectVisCars.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                RectVisClient.BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
+                RectVisClient.BorderBrush = new SolidColorBrush(Color.FromRgb(146, 146, 146));
                 RectVisService.BorderBrush = new SolidColorBrush(Colors.Transparent);
             }
             else if (border == RectVisService)
@@ -45,7 +45,7 @@ namespace Carsharing
 
                 RectVisCars.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 RectVisClient.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                RectVisService.BorderBrush = new SolidColorBrush(Colors.DeepSkyBlue);
+                RectVisService.BorderBrush = new SolidColorBrush(Color.FromRgb(146, 146, 146));
             }
 
         }

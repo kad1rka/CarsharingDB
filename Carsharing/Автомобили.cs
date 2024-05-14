@@ -12,31 +12,32 @@ namespace Carsharing
     using System;
     using System.Collections.Generic;
     
-    public partial class Fleet
+    public partial class Автомобили
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Fleet()
+        public Автомобили()
         {
-            this.Accidents = new HashSet<Accidents>();
-            this.Maintenance_Events = new HashSet<Maintenance_Events>();
-            this.Trips = new HashSet<Trips>();
-            this.Vehicle_Coordinates = new HashSet<Vehicle_Coordinates>();
+            this.ДТП = new HashSet<ДТП>();
+            this.Поездки = new HashSet<Поездки>();
+            this.Страховые_Данные = new HashSet<Страховые_Данные>();
+            this.Техническое_Обслуживание = new HashSet<Техническое_Обслуживание>();
         }
     
-        public int vehicle_id { get; set; }
-        public string brand { get; set; }
-        public string model { get; set; }
-        public Nullable<int> year { get; set; }
-        public string license_plate { get; set; }
-        public string condition { get; set; }
+        public int ID_Автомобиля { get; set; }
+        public string Модель { get; set; }
+        public Nullable<int> Год_Выпуска { get; set; }
+        public string VIN_Номер { get; set; }
+        public Nullable<int> ID_Тарифа { get; set; }
+        public string Описание { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Accidents> Accidents { get; set; }
+        public virtual ICollection<ДТП> ДТП { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Maintenance_Events> Maintenance_Events { get; set; }
+        public virtual ICollection<Поездки> Поездки { get; set; }
+        public virtual Статус_Автомобиля Статус_Автомобиля { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Trips> Trips { get; set; }
+        public virtual ICollection<Страховые_Данные> Страховые_Данные { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vehicle_Coordinates> Vehicle_Coordinates { get; set; }
+        public virtual ICollection<Техническое_Обслуживание> Техническое_Обслуживание { get; set; }
     }
 }

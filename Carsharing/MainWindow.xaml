@@ -112,11 +112,11 @@
                     </Button.Style>
                 </Button>
 
-                <Button x:Name="ClientButton"  VerticalAlignment="Top" Height="40" Grid.Row="1" BorderBrush="Transparent" Margin="0,50,0,0" Click="ClientButton_Click">
-                    <Border x:Name="RectVisClient" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5,5,5,5">
+                <Button x:Name="TripsButton"  VerticalAlignment="Top" Height="40" Grid.Row="1" BorderBrush="Transparent" Margin="0,50,0,0" Click="ClientButton_Click">
+                    <Border x:Name="RectVisTrips" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5,5,5,5">
                         <StackPanel Orientation="Horizontal" Width="290">
-                            <Image Height="32" Source="/Source/clients.png" Margin="10,0,15,0" />
-                            <TextBlock Text="Клиенты" VerticalAlignment="Center" FontFamily="Montserrat" FontSize="20" Foreground="White"/>
+                            <Image Height="32" Source="/Source/trips.png" Margin="10,0,15,0" />
+                            <TextBlock Text="Поездки" VerticalAlignment="Center" FontFamily="Montserrat" FontSize="20" Foreground="White"/>
                         </StackPanel>
                     </Border>
                     <Button.Style>
@@ -171,6 +171,34 @@
                     </Button.Style>
                 </Button>
 
+                <Button x:Name="ClientsButton" VerticalAlignment="Top" Height="40" Grid.Row="1" BorderBrush="Transparent" Margin="0,130,0,0"  Click="ClientsButton_Click">
+                    <Border x:Name="RectVisClients" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5,5,5,5">
+                        <StackPanel Orientation="Horizontal" Width="290">
+                            <Image Height="32" Source="/Source/clients.png" Margin="10,0,15,0" />
+                            <TextBlock Text="Клиенты" VerticalAlignment="Center" FontFamily="Montserrat" FontSize="20" Foreground="White"/>
+                        </StackPanel>
+                    </Border>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="Background" Value="DeepSkyBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
 
 
             </Grid>

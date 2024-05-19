@@ -23,8 +23,8 @@
           <Property Name="Модель" Type="varchar" MaxLength="100" />
           <Property Name="Год_Выпуска" Type="int" />
           <Property Name="VIN_Номер" Type="varchar" MaxLength="17" />
-          <Property Name="ID_Тарифа" Type="int" />
           <Property Name="Описание" Type="varchar" MaxLength="50" />
+          <Property Name="Номер" Type="varchar" MaxLength="9" />
         </EntityType>
         <EntityType Name="ДТП">
           <Key>
@@ -355,8 +355,8 @@
           <Property Name="Модель" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Год_Выпуска" Type="Int32" />
           <Property Name="VIN_Номер" Type="String" MaxLength="17" FixedLength="false" Unicode="false" />
-          <Property Name="ID_Тарифа" Type="Int32" />
           <Property Name="Описание" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Номер" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ДТП" Relationship="Self.FK_ДТП_Автомобили" FromRole="Автомобили" ToRole="ДТП" />
           <NavigationProperty Name="Поездки" Relationship="Self.FK_Поездки_Автомобили" FromRole="Автомобили" ToRole="Поездки" />
           <NavigationProperty Name="Статус_Автомобиля" Relationship="Self.FK_Статус_Автомобиля_Автомобили" FromRole="Автомобили" ToRole="Статус_Автомобиля" />
@@ -712,8 +712,8 @@
                 <ScalarProperty Name="Модель" ColumnName="Модель" />
                 <ScalarProperty Name="Год_Выпуска" ColumnName="Год_Выпуска" />
                 <ScalarProperty Name="VIN_Номер" ColumnName="VIN_Номер" />
-                <ScalarProperty Name="ID_Тарифа" ColumnName="ID_Тарифа" />
                 <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="Номер" ColumnName="Номер" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

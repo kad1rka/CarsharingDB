@@ -1,0 +1,196 @@
+﻿<Page x:Class="Carsharing.Trips"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Carsharing"
+      mc:Ignorable="d" 
+      d:DesignHeight="775" d:DesignWidth="1200"
+      Title="Поездки">
+
+    <Border Background="LightBlue" CornerRadius="0,0,10,0">
+        <Grid>
+            <!--Строк обнаружено-->
+            <StackPanel Orientation="Horizontal" Height="25" VerticalAlignment="Top"  HorizontalAlignment="Left" Margin="38,40,0,0">
+                <TextBlock x:Name="countTripRows" FontFamily="Montserrat"  FontSize="18" Text="999999999"  Height="25" VerticalAlignment="Top"/>
+                <TextBlock Text=" строк обнаружено"  FontSize="18" Height="25" FontFamily="Montserrat" VerticalAlignment="Bottom"/>
+            </StackPanel>
+            <!--Кнопка добавления нового автомобиля-->
+            <Button x:Name="AddTripButton" Content="+ Добавить новую поездку" Foreground="White" BorderThickness="0" FontFamily="Montserrat" FontSize="13" Width="230" Height="30" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0,70,55,0" Click="AddTripButton_Click"  >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="MediumSlateBlue"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Background" Value="#AA00FF"/>
+                            </Trigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <!--Кнопка сохранения изменений-->
+            <Button x:Name="SaveTripButton" ToolTip="Сохранить"  Foreground="White"  BorderThickness="0"  Width="30"  Height="30" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0,70,20,0" Click="SaveTripButton_Click"  >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="4"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="MediumSlateBlue"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Background" Value="#AA00FF"/>
+                            </Trigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+                <Image Source="/Source/SaveButton.png" Width="21"/>
+
+            </Button>
+            <!--Данные из БД - Датагрид -->
+            <DataGrid x:Name="tripsDataGrid"  GridLinesVisibility="None" CanUserResizeRows="False" CanUserResizeColumns="False" HeadersVisibility="Column" d:ItemsSource="{d:SampleData ItemCount=15}" FontFamily="Montserrat" FontSize="16" Background="Transparent" BorderThickness="0" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False"  Width="1140" Height="536" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="38,105,15,0"  >
+
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                        <Setter Property="Foreground" Value="#615D5D"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="Margin" Value="0,5,0,0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type DataGridRow}">
+                                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="8" Padding="0,5,0,5">
+                                        <SelectiveScrollingGrid>
+                                            <SelectiveScrollingGrid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition />
+                                            </SelectiveScrollingGrid.ColumnDefinitions>
+                                            <DataGridCellsPresenter Grid.Column="1" ItemsPanel="{TemplateBinding ItemsPanel}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                        </SelectiveScrollingGrid>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Margin" Value="0,5,5,5" />
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <EventSetter Event="MouseEnter" Handler="Cell_MouseEnter"/>
+
+
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="номер" Binding="{Binding ID_Поездки}" Width="90">
+
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="клиент" Binding="{Binding ID_Клиента}" Width="90">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="авто" Binding="{Binding ID_Автомобиля}" Width="90">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="начало" Binding="{Binding ДатаВремя_Начала,StringFormat={}{0:dd/MM/yyyy HH:mm:ss}}" Width="160"/>
+                    <DataGridTextColumn Header="конец" Binding="{Binding ДатаВремя_Конца,StringFormat={}{0:dd/MM/yyyy HH:mm:ss}}"  Width="160"/>
+                    <DataGridTextColumn Header="локация начала" Binding="{Binding ID_Локации_Начала}" Width="150"/>
+                    <DataGridTextColumn Header="локация конца" Binding="{Binding ID_Локации_Конца}"  Width="150"/>
+                    <DataGridTextColumn Header="стоимость" Binding="{Binding Стоимость}" Width="*"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <!--Кнпока редактировать-->
+                                    <Border Background="MediumSlateBlue"  ToolTip="Сохранить"  Margin="0,0,5,0" Height="25" Width="25" CornerRadius="5">
+                                        <Button  x:Name="EditTripButton" Background="Transparent" BorderThickness="0" Click="EditTripButton_Click">
+                                            <Image Source="/Source/editButton.png" Height="19" Width="19"/>
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Cursor" Value="Hand"/>
+                                                        </Trigger>
+
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </Border>
+                                    <!--Кнопка удалить-->
+                                    <Border  Background="IndianRed" ToolTip="Удалить"  Margin="5,0,0,0" Height="25" Width="25" CornerRadius="5">
+                                        <Button x:Name="DeleteTripButton" Background="Transparent" BorderThickness="0" Click="DeleteTripButton_Click">
+                                            <Image Source="/Source/deleteButton.png" Height="15" Width="15"/>
+                                            <Button.Style>
+                                                <Style TargetType="{x:Type Button}">
+
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Cursor" Value="Hand"/>
+                                                        </Trigger>
+
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                    </Border>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </Grid>
+    </Border>
+</Page>

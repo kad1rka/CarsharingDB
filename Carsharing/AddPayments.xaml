@@ -1,0 +1,176 @@
+﻿<Page x:Class="Carsharing.AddPayments"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Carsharing"
+      mc:Ignorable="d" 
+      d:DesignHeight="775" d:DesignWidth="1200">
+
+    <Grid Background="#27325E">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--Заголовок-->
+        <StackPanel Grid.Row="0" Orientation="Vertical"  >
+
+            <TextBlock Text="Добавление записи оплаты" FontFamily="Montserrat Bold" FontSize="35" Margin="50 50 0 0" Foreground="White"/>
+            <TextBlock Text="Пожалуйста, заполните обязательные поля, а затем нажмите кнопку 'Добавить'." Foreground="White" FontFamily="Montserrat" FontSize="18" Margin="50 15"/>
+            <Rectangle Width="1200" Height="2" Fill="White"/>
+        </StackPanel>
+        <!--Общое поле по горизонтали-->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Top">
+            <!--Первое по вертикали-->
+            <StackPanel Orientation="Vertical" Margin="50 25 0 0" Width="500" Height="400" HorizontalAlignment="Left">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Номер поездки*" Width="160" HorizontalAlignment="Left" FontFamily="Montserrat" FontSize="18" Foreground="Gray"/>
+                        <TextBlock x:Name="SearchTrip" Margin="5 0 0 0" Width="340" HorizontalAlignment="Left" FontFamily="Montserrat" FontSize="18" Foreground="Gray"/>
+                    </StackPanel>
+                    <TextBox x:Name="Trip" PreviewTextInput="TextBox_PreviewTextInput" TextChanged="Trip_TextChanged" >
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" >
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Height" Value="35"/>
+                                <Setter Property="Width" Value="300"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="FontFamily" Value="Montserrat"/>
+                                <Setter Property="FontSize" Value="20"/>
+                                <Setter Property="Padding" Value="5 0 0 0" />
+                            </Style>
+                        </TextBox.Style>
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                </StackPanel>
+                
+                <StackPanel Margin="0 25 0 0">
+                    <TextBlock Text="Дата и время*" Width="150" HorizontalAlignment="Left" FontFamily="Montserrat" FontSize="18" Foreground="Gray"/>
+                    <TextBox Name="DateAndTime" PreviewTextInput="TextBox_PreviewTextInputDate"  MaxLength="19">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" >
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Height" Value="35"/>
+                                <Setter Property="Width" Value="300"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="FontFamily" Value="Montserrat"/>
+                                <Setter Property="FontSize" Value="20"/>
+                                <Setter Property="Padding" Value="5 0 0 0" />
+                            </Style>
+                        </TextBox.Style>
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                    <TextBlock Text="* дату вводите в формате: 01.01.2000" Foreground="LightSlateGray"/>
+                </StackPanel>
+
+            </StackPanel>
+            <!--Второе по вертикали-->
+            <StackPanel Orientation="Vertical" Margin="50 25 0 0" Width="500" HorizontalAlignment="Left">
+                <StackPanel Margin="0 0 0 0">
+                    <TextBlock Text="Стоимость*" Width="150" HorizontalAlignment="Left" FontFamily="Montserrat" FontSize="18" Foreground="Gray"/>
+                    <TextBox Name="Price" PreviewTextInput="TextBox_PreviewTextInput">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" >
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Height" Value="35"/>
+                                <Setter Property="Width" Value="300"/>
+                                <Setter Property="HorizontalAlignment" Value="Left"/>
+                                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                <Setter Property="FontFamily" Value="Montserrat"/>
+                                <Setter Property="FontSize" Value="20"/>
+                                <Setter Property="Padding" Value="5 0 0 0" />
+                            </Style>
+                        </TextBox.Style>
+                        <TextBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </TextBox.Resources>
+                    </TextBox>
+                </StackPanel>
+                <!--Кнопки-->
+
+            </StackPanel>
+
+
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0 0 300 225" HorizontalAlignment="Right" VerticalAlignment="Bottom" >
+            <Button x:Name="GoBackButton" Content="НАЗАД" Foreground="MediumSlateBlue" FontFamily="Montserrat" FontSize="15" Width="140" Height="45" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0 0 20 0" Click="GoBackButton_Click"  >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                        <Setter Property="BorderBrush" Value="MediumSlateBlue"/>
+                        <Setter Property="BorderThickness" Value="1"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="Transparent"/>
+
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Background" Value="DarkSlateBlue"/>
+                                <Setter Property="Foreground" Value="White"/>
+
+                            </Trigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+            <Button x:Name="AddPaymentsButton" Content="ДОБАВИТЬ" Foreground="White" BorderThickness="0" FontFamily="Montserrat" FontSize="15" Width="140" Height="45" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0 0 20 0" Click="AddPaymentsButton_Click"   >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="MediumSlateBlue"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type Button}">
+                                    <Border Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Cursor" Value="Hand"/>
+                                <Setter Property="Background" Value="#AA00FF"/>
+                            </Trigger>
+
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Page>

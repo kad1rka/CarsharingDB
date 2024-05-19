@@ -27,8 +27,8 @@ namespace Carsharing
         public string Модель { get; set; }
         public Nullable<int> Год_Выпуска { get; set; }
         public string VIN_Номер { get; set; }
-        public Nullable<int> ID_Тарифа { get; set; }
         public string Описание { get; set; }
+        public string Номер { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ДТП> ДТП { get; set; }

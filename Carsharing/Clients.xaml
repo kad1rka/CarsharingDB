@@ -1,4 +1,4 @@
-﻿<Page x:Class="Carsharing.Cars"
+﻿<Page x:Class="Carsharing.Clients"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,14 +6,15 @@
       xmlns:local="clr-namespace:Carsharing"
       mc:Ignorable="d" 
       d:DesignHeight="775" d:DesignWidth="1200"
-      Title="Автомобили">
-    
+      Title="Клиенты">
+
+
     <Page.Resources>
-        
+
         <Style TargetType="Thumb">
 
             <Setter Property="Template">
-                
+
                 <Setter.Value>
                     <ControlTemplate TargetType="Thumb">
                         <Rectangle Fill="{TemplateBinding Background}" />
@@ -49,7 +50,7 @@
     <Border Background="Transparent" >
         <Grid>
 
-            <TabControl x:Name="tabControl" Background="Transparent" BorderBrush="Transparent">
+            <TabControl Background="Transparent" BorderBrush="Transparent">
                 <TabControl.Resources>
                     <Style TargetType="TabItem">
                         <Setter Property="Template">
@@ -77,20 +78,20 @@
                         </Setter>
                     </Style>
                 </TabControl.Resources>
-                
-                <!--Категория Автомобили-->
-                <TabItem Width="150" Background="DodgerBlue" FontSize="18" HorizontalContentAlignment="Left" FontFamily="Montserrat" Header="Автомобили">
+
+                <!--Категория Клиенты -->
+                <TabItem Width="150" Background="DodgerBlue" FontSize="18" HorizontalContentAlignment="Left" FontFamily="Montserrat" Header="Клиенты">
 
                     <TabItem.Content>
                         <Border Background="LightBlue" CornerRadius="0,0,10,0">
                             <Grid>
                                 <!--Строк обнаружено-->
                                 <StackPanel Orientation="Horizontal" Height="25" VerticalAlignment="Top"  HorizontalAlignment="Left" Margin="38,40,0,0">
-                                    <TextBlock x:Name="countCarsRows" Text="999999999"  Height="25" VerticalAlignment="Top"/>
+                                    <TextBlock x:Name="countClientsRows" Text="999999999"  Height="25" VerticalAlignment="Top"/>
                                     <TextBlock Text=" строк обнаружено" Height="25" FontFamily="Montserrat" VerticalAlignment="Bottom"/>
                                 </StackPanel>
                                 <!--Кнопка добавления нового автомобиля-->
-                                <Button x:Name="AddCarsButton" Content="+ Добавить новый автомобиль" Foreground="White" BorderThickness="0" FontFamily="Montserrat" FontSize="13" Width="230" Height="30" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0,70,55,0" Click="AddCarsButton_Click"  >
+                                <Button x:Name="AddClientsButton" Content="+ Добавить нового клиента" Foreground="White" BorderThickness="0" FontFamily="Montserrat" FontSize="13" Width="230" Height="30" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0,70,55,0" Click="AddClientsButton_Click"  >
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="4"/>
@@ -117,9 +118,9 @@
                                             </Style.Triggers>
                                         </Style>
                                     </Button.Style>
-                                </Button> 
+                                </Button>
                                 <!--Кнопка сохранения изменений-->
-                                <Button x:Name="SaveCarsButton" ToolTip="Сохранить"  Foreground="White"  BorderThickness="0"  Width="30"  Height="30" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0,70,20,0" Click="SaveButton_Click"  >
+                                <Button x:Name="SaveClientsButton" ToolTip="Сохранить"  Foreground="White"  BorderThickness="0"  Width="30"  Height="30" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0,70,20,0" Click="SaveClientsButton_Click"   >
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="4"/>
@@ -150,7 +151,7 @@
 
                                 </Button>
                                 <!--Данные из БД - Датагрид -->
-                                <DataGrid x:Name="carsDataGrid"  GridLinesVisibility="None" CanUserResizeRows="False" CanUserResizeColumns="False" HeadersVisibility="Column" d:ItemsSource="{d:SampleData ItemCount=15}" FontFamily="Montserrat" FontSize="16" Background="Transparent" BorderThickness="0" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False"  Width="1140" Height="536" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="38,105,15,0" >
+                                <DataGrid x:Name="clientsDataGrid"  GridLinesVisibility="None" CanUserResizeRows="False" CanUserResizeColumns="False" HeadersVisibility="Column" d:ItemsSource="{d:SampleData ItemCount=15}" FontFamily="Montserrat" FontSize="16" Background="Transparent" BorderThickness="0" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False"  Width="1140" Height="536" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="38,105,15,0"  >
 
                                     <DataGrid.Resources>
                                         <Style TargetType="DataGridColumnHeader">
@@ -159,9 +160,9 @@
                                             <Setter Property="HorizontalContentAlignment" Value="Left"/>
                                             <Setter Property="Foreground" Value="#615D5D"/>
                                             <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Cursor" Value="Hand" />
-                                            </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Cursor" Value="Hand" />
+                                                </Trigger>
                                             </Style.Triggers>
                                         </Style>
                                         <Style TargetType="DataGridRow">
@@ -187,39 +188,52 @@
                                         <Style TargetType="DataGridCell">
                                             <Setter Property="Margin" Value="0,5,5,5" />
                                             <Setter Property="VerticalContentAlignment" Value="Center"/>
-                                            <EventSetter Event="MouseEnter" Handler="Cell_MouseEnter"/>
+
                                         </Style>
                                     </DataGrid.Resources>
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="номер" Binding="{Binding ID_Автомобиля}" Width="100">
-                                            
+                                        <DataGridTextColumn Header="номер" Binding="{Binding ID_Клиента}" Width="70">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="HorizontalAlignment" Value="Center" />
+
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="ФИО" Binding="{Binding ФИО}" Width="160"/>
+                                        <DataGridTextColumn Header="дата рождения" Binding="{Binding Дата_Рождения, StringFormat={}{0:dd/MM/yyyy}}" Width="136">
                                             <DataGridTextColumn.ElementStyle>
                                                 <Style TargetType="TextBlock">
                                                     <Setter Property="HorizontalAlignment" Value="Center" />
                                                 </Style>
                                             </DataGridTextColumn.ElementStyle>
                                         </DataGridTextColumn>
-                                        <DataGridTextColumn Header="модель" Binding="{Binding Модель}" Width="140"/>
-                                        <DataGridTextColumn Header="год" Binding="{Binding Год_Выпуска}" Width="60"/>
-                                        <DataGridTextColumn Header="VIN-номер" Binding="{Binding VIN_Номер}" Width="180"/>
-                                        <DataGridTextColumn Header="рег. номер" Binding="{Binding Номер}"  Width="150"/>
-                                        <DataGridTextColumn Header="описание" Binding="{Binding Описание}" Width="*"/>
+                                        <DataGridTextColumn Header="телефон" Binding="{Binding Телефон}" Width="120"/>
+                                        <DataGridTextColumn Header="почта" Binding="{Binding Почта}" Width="110"/>
+                                        <DataGridTextColumn Header="номер в.у." Binding="{Binding Номер_ВУ}" Width="110"/>
+                                        <DataGridTextColumn Header="дата выдачи в.у." Binding="{Binding Дата_Выдачи_ВУ, StringFormat={}{0:dd/MM/yyyy}}" Width="140">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="HorizontalAlignment" Value="Center" />
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="номер/серия паспорта" Binding="{Binding НомерСерия_Паспорта}" Width="*"/>
                                         <DataGridTemplateColumn>
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
                                                         <!--Кнпока редактировать-->
                                                         <Border Background="MediumSlateBlue"  ToolTip="Сохранить"  Margin="0,0,5,0" Height="25" Width="25" CornerRadius="5">
-                                                            <Button  x:Name="EditCarsButton" Background="Transparent" BorderThickness="0" Click="EditButton_Click">
+                                                            <Button  x:Name="EditCarsButton" Background="Transparent" BorderThickness="0" Click="EditCarsButton_Click" >
                                                                 <Image Source="/Source/editButton.png" Height="19" Width="19"/>
                                                                 <Button.Style>
                                                                     <Style TargetType="{x:Type Button}">
-                                                                        
+
                                                                         <Style.Triggers>
                                                                             <Trigger Property="IsMouseOver" Value="True">
                                                                                 <Setter Property="Cursor" Value="Hand"/>
                                                                             </Trigger>
-
                                                                         </Style.Triggers>
                                                                     </Style>
                                                                 </Button.Style>
@@ -227,7 +241,7 @@
                                                         </Border>
                                                         <!--Кнопка удалить-->
                                                         <Border  Background="IndianRed" ToolTip="Удалить"  Margin="5,0,0,0" Height="25" Width="25" CornerRadius="5">
-                                                            <Button x:Name="DeleteCarsButton" Background="Transparent" BorderThickness="0" Click="DeleteCarsButton_Click">
+                                                            <Button x:Name="DeleteClientButton" Background="Transparent" BorderThickness="0" Click="DeleteClientButton_Click" >
                                                                 <Image Source="/Source/deleteButton.png" Height="15" Width="15"/>
                                                                 <Button.Style>
                                                                     <Style TargetType="{x:Type Button}">
@@ -252,20 +266,25 @@
                             </Grid>
                         </Border>
                     </TabItem.Content>
-                <!--Категория Локации-->
+
                 </TabItem>
-                <TabItem Width="150" Background="DodgerBlue" FontFamily="Montserrat" FontSize="18"  Header="Локации">
+                <!--Категория Тарифы-->
+                <TabItem Width="150" Background="DodgerBlue" FontFamily="Montserrat" FontSize="18"  Header="Тарифы">
 
                     <TabItem.Content>
                         <Border Background="LightBlue" CornerRadius="0,0,10,0">
                             <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="19*"/>
+                                    <ColumnDefinition Width="180*"/>
+                                </Grid.ColumnDefinitions>
                                 <!--Строк обнаружено-->
-                                <StackPanel Orientation="Horizontal" Height="25" VerticalAlignment="Top"  HorizontalAlignment="Left" Margin="38,40,0,0">
-                                    <TextBlock x:Name="countLocationsRows" Text="999999999"  Height="25" VerticalAlignment="Top"/>
+                                <StackPanel Orientation="Horizontal" Height="25" VerticalAlignment="Top"  HorizontalAlignment="Left" Margin="38,40,0,0" Grid.ColumnSpan="2">
+                                    <TextBlock x:Name="countTariffRows" Text="999999999"  Height="25" VerticalAlignment="Top"/>
                                     <TextBlock Text=" строк обнаружено" Height="25" FontFamily="Montserrat" VerticalAlignment="Bottom"/>
                                 </StackPanel>
                                 <!--Кнопка добавления нового тарифа-->
-                                <Button x:Name="AddLocationButton" Content="+ Добавить новую локацию" Foreground="White" BorderThickness="0" FontFamily="Montserrat" FontSize="13" Width="230" Height="30" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0,70,55,0" Click="AddLocationButton_Click"  >
+                                <Button x:Name="AddTariffButton" Content="+ Добавить новый тариф" Foreground="White" BorderThickness="0" FontFamily="Montserrat" FontSize="13" Width="230" Height="30" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0,70,55,0" Grid.Column="1" Click="AddTariffButton_Click"  >
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="4"/>
@@ -294,7 +313,7 @@
                                     </Button.Style>
                                 </Button>
                                 <!--Кнопка сохранения изменений-->
-                                <Button x:Name="SaveLocationsButton" ToolTip="Сохранить"  Foreground="White"  BorderThickness="0"  Width="30"  Height="30" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0,70,20,0" Click="SaveLocationsButton_Click"  >
+                                <Button x:Name="SaveTariffButton" ToolTip="Сохранить"  Foreground="White"  BorderThickness="0"  Width="30"  Height="30" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0,70,20,0" Grid.Column="1" Click="SaveTariffButton_Click"  >
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="4"/>
@@ -325,7 +344,7 @@
 
                                 </Button>
                                 <!--Данные из БД - Датагрид -->
-                                <DataGrid x:Name="locationsDataGrid"  GridLinesVisibility="None" CanUserResizeRows="False" CanUserResizeColumns="False" HeadersVisibility="Column" d:ItemsSource="{d:SampleData ItemCount=15}" FontFamily="Montserrat" FontSize="16" Background="Transparent" BorderThickness="0" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False"  Width="1140" Height="536" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="38,105,15,0"  >
+                                <DataGrid x:Name="tariffDataGrid"  GridLinesVisibility="None" CanUserResizeRows="False" CanUserResizeColumns="False" HeadersVisibility="Column" d:ItemsSource="{d:SampleData ItemCount=15}" FontFamily="Montserrat" FontSize="16" Background="Transparent" BorderThickness="0" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False"  Width="1140" Height="536" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="38,105,0,0" Grid.ColumnSpan="2" >
 
                                     <DataGrid.Resources>
                                         <Style TargetType="DataGridColumnHeader">
@@ -366,7 +385,7 @@
                                         </Style>
                                     </DataGrid.Resources>
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="номер" Binding="{Binding ID_Локации}" Width="100">
+                                        <DataGridTextColumn Header="номер" Binding="{Binding ID_Тарифа}" Width="100">
 
                                             <DataGridTextColumn.ElementStyle>
                                                 <Style TargetType="TextBlock">
@@ -374,28 +393,36 @@
                                                 </Style>
                                             </DataGridTextColumn.ElementStyle>
                                         </DataGridTextColumn>
-                                        <DataGridTextColumn Header="долгота" Binding="{Binding Долгота}" Width="170">
+                                        <DataGridTextColumn Header="наименование" Binding="{Binding Наименование}" Width="170"/>
+                                        <DataGridTextColumn Header="стоимость/час" Binding="{Binding Стоимость}" Width="180">
                                             <DataGridTextColumn.ElementStyle>
                                                 <Style TargetType="TextBlock">
                                                     <Setter Property="HorizontalAlignment" Value="Center" />
                                                 </Style>
                                             </DataGridTextColumn.ElementStyle>
                                         </DataGridTextColumn>
-                                        <DataGridTextColumn Header="широта" Binding="{Binding Широта}" Width="180">
+                                        <DataGridTextColumn Header="мин. стаж" Binding="{Binding Мин_Стаж}" Width="150">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="HorizontalAlignment" Value="Center" />
+
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="мин. возраст" Binding="{Binding Мин_Возраст}" Width="*">
                                             <DataGridTextColumn.ElementStyle>
                                                 <Style TargetType="TextBlock">
                                                     <Setter Property="HorizontalAlignment" Value="Center" />
                                                 </Style>
                                             </DataGridTextColumn.ElementStyle>
                                         </DataGridTextColumn>
-                                        <DataGridTextColumn Header="описание" Binding="{Binding Описание}" Width="*"/>
                                         <DataGridTemplateColumn>
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
                                                         <!--Кнпока редактировать-->
                                                         <Border Background="MediumSlateBlue"  ToolTip="Сохранить"  Margin="0,0,5,0" Height="25" Width="25" CornerRadius="5">
-                                                            <Button  x:Name="EditLocationButton" Background="Transparent" BorderThickness="0" Click="SaveLocationsButton_Click" >
+                                                            <Button  x:Name="EditTariffButton" Background="Transparent" BorderThickness="0" Click="EditTariffButton_Click" >
                                                                 <Image Source="/Source/editButton.png" Height="19" Width="19"/>
                                                                 <Button.Style>
                                                                     <Style TargetType="{x:Type Button}">
@@ -412,7 +439,7 @@
                                                         </Border>
                                                         <!--Кнопка удалить-->
                                                         <Border  Background="IndianRed" ToolTip="Удалить"  Margin="5,0,0,0" Height="25" Width="25" CornerRadius="5">
-                                                            <Button x:Name="DeleteLocationButton" Background="Transparent" BorderThickness="0" Click="DeleteLocationButton_Click">
+                                                            <Button x:Name="DeleteTariffButton" Background="Transparent" BorderThickness="0" Click="DeleteTariffButton_Click" >
                                                                 <Image Source="/Source/deleteButton.png" Height="15" Width="15"/>
                                                                 <Button.Style>
                                                                     <Style TargetType="{x:Type Button}">
@@ -437,15 +464,15 @@
                         </Border>
                     </TabItem.Content>
                 </TabItem>
-                
-                <!--Категория страхования-->
-                <TabItem Width="150" Background="DodgerBlue" FontFamily="Montserrat" FontSize="18"  Header="Страхование">
+
+                <!--Категория Оплата-->
+                <TabItem Width="150" Background="DodgerBlue" FontFamily="Montserrat" FontSize="18"  Header="Оплата">
                     <TabItem.Content>
                         <Border Background="LightBlue" CornerRadius="0,0,10,0">
                             <Grid>
                                 <!--Строк обнаружено-->
                                 <StackPanel Orientation="Horizontal" Height="25" VerticalAlignment="Top"  HorizontalAlignment="Left" Margin="38,40,0,0">
-                                    <TextBlock x:Name="countInsuranceRows" Text="999999999"  FontFamily="Montserrat" Height="25" VerticalAlignment="Top"/>
+                                    <TextBlock x:Name="countPaymentsRows" Text="999999999"  Height="25" VerticalAlignment="Top"/>
                                     <TextBlock Text=" строк обнаружено" Height="25" FontFamily="Montserrat" VerticalAlignment="Bottom"/>
                                 </StackPanel>
                                 <!--Кнопка добавления нового тарифа-->
@@ -478,7 +505,7 @@
                                     </Button.Style>
                                 </Button>
                                 <!--Кнопка сохранения изменений-->
-                                <Button x:Name="SaveInsuranceButton" ToolTip="Сохранить"  Foreground="White"  BorderThickness="0"  Width="30"  Height="30" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0,70,20,0" Click="SaveInsuranceButton_Click"  >
+                                <Button x:Name="SavePaymentsButton" ToolTip="Сохранить"  Foreground="White"  BorderThickness="0"  Width="30"  Height="30" VerticalAlignment="Top"  Padding="5" HorizontalAlignment="Right" Margin="0,70,20,0" Click="SavePaymentsButton_Click"  >
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="4"/>
@@ -509,7 +536,7 @@
 
                                 </Button>
                                 <!--Данные из БД - Датагрид -->
-                                <DataGrid x:Name="insuranceDataGrid"  GridLinesVisibility="None" CanUserResizeRows="False" CanUserResizeColumns="False" HeadersVisibility="Column" d:ItemsSource="{d:SampleData ItemCount=15}" FontFamily="Montserrat" FontSize="16" Background="Transparent" BorderThickness="0" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False"  Width="1140" Height="536" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="38,105,15,0" >
+                                <DataGrid x:Name="paymentsDataGrid"  GridLinesVisibility="None" CanUserResizeRows="False" CanUserResizeColumns="False" HeadersVisibility="Column" d:ItemsSource="{d:SampleData ItemCount=15}" FontFamily="Montserrat" FontSize="16" Background="Transparent" BorderThickness="0" RowDetailsVisibilityMode="VisibleWhenSelected" AutoGenerateColumns="False"  Width="1140" Height="536" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="38,105,15,0" >
 
                                     <DataGrid.Resources>
                                         <Style TargetType="DataGridColumnHeader">
@@ -547,12 +574,10 @@
                                             <Setter Property="Margin" Value="0,5,5,5" />
                                             <Setter Property="VerticalContentAlignment" Value="Center"/>
                                             <EventSetter Event="MouseEnter" Handler="Cell_MouseEnter"/>
-
-
                                         </Style>
                                     </DataGrid.Resources>
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="номер" Binding="{Binding ID_Страховки}" Width="100">
+                                        <DataGridTextColumn Header="номер" Binding="{Binding ID_Оплаты}" Width="100">
 
                                             <DataGridTextColumn.ElementStyle>
                                                 <Style TargetType="TextBlock">
@@ -560,21 +585,15 @@
                                                 </Style>
                                             </DataGridTextColumn.ElementStyle>
                                         </DataGridTextColumn>
-                                        <DataGridTextColumn Header="номер автомобиля" Binding="{Binding ID_Автомобиля}" Width="170">
+                                        <DataGridTextColumn Header="номер поездки" Binding="{Binding ID_Поездки}" Width="170"/>
+                                        <DataGridTextColumn Header="дата/время оплаты" Binding="{Binding ДатаВремя,StringFormat={}{0:dd/MM/yyyy HH:mm:ss}}" Width="*">
                                             <DataGridTextColumn.ElementStyle>
                                                 <Style TargetType="TextBlock">
                                                     <Setter Property="HorizontalAlignment" Value="Center" />
                                                 </Style>
                                             </DataGridTextColumn.ElementStyle>
                                         </DataGridTextColumn>
-                                        <DataGridTextColumn Header="дата начала страхования" Binding="{Binding ДатаНачалаСтрахования, StringFormat={}{0:dd/MM/yyyy}}" Width="*">
-                                            <DataGridTextColumn.ElementStyle>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="HorizontalAlignment" Value="Center" />
-                                                </Style>
-                                            </DataGridTextColumn.ElementStyle>
-                                        </DataGridTextColumn>
-                                        <DataGridTextColumn Header="дата конца страхования" Binding="{Binding ДатаКонцаСтрахования, StringFormat={}{0:dd/MM/yyyy}}" Width="*">
+                                        <DataGridTextColumn Header="стоимость" Binding="{Binding Стоимость, StringFormat={}{0} ₽}" Width="*">
                                             <DataGridTextColumn.ElementStyle>
                                                 <Style TargetType="TextBlock">
                                                     <Setter Property="HorizontalAlignment" Value="Center" />
@@ -582,14 +601,14 @@
                                                 </Style>
                                             </DataGridTextColumn.ElementStyle>
                                         </DataGridTextColumn>
-                                        
+
                                         <DataGridTemplateColumn>
                                             <DataGridTemplateColumn.CellTemplate>
                                                 <DataTemplate>
                                                     <StackPanel Orientation="Horizontal">
                                                         <!--Кнпока редактировать-->
                                                         <Border Background="MediumSlateBlue"  ToolTip="Сохранить"  Margin="0,0,5,0" Height="25" Width="25" CornerRadius="5">
-                                                            <Button  x:Name="EditInsuranceButton" Background="Transparent" BorderThickness="0" Click="SaveInsuranceButton_Click">
+                                                            <Button  x:Name="EditInsuranceButton" Background="Transparent" BorderThickness="0" Click="EditInsuranceButton_Click">
                                                                 <Image Source="/Source/editButton.png" Height="19" Width="19"/>
                                                                 <Button.Style>
                                                                     <Style TargetType="{x:Type Button}">
@@ -632,8 +651,6 @@
                     </TabItem.Content>
                 </TabItem>
             </TabControl>
-
-
         </Grid>
     </Border>
 </Page>

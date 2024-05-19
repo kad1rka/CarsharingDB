@@ -30,22 +30,32 @@ namespace Carsharing
             if (border == RectVisCars)
             {
                 RectVisCars.BorderBrush = new SolidColorBrush(Color.FromRgb(146,146,146)); 
-                RectVisClient.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisTrips.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 RectVisService.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisClients.BorderBrush = new SolidColorBrush(Colors.Transparent);
 
-            } else if (border == RectVisClient)
+            } else if (border == RectVisTrips)
             {
 
                 RectVisCars.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                RectVisClient.BorderBrush = new SolidColorBrush(Color.FromRgb(146, 146, 146));
+                RectVisTrips.BorderBrush = new SolidColorBrush(Color.FromRgb(146, 146, 146));
                 RectVisService.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisClients.BorderBrush = new SolidColorBrush(Colors.Transparent);
             }
             else if (border == RectVisService)
             {
 
                 RectVisCars.BorderBrush = new SolidColorBrush(Colors.Transparent);
-                RectVisClient.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisTrips.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 RectVisService.BorderBrush = new SolidColorBrush(Color.FromRgb(146, 146, 146));
+                RectVisClients.BorderBrush = new SolidColorBrush(Colors.Transparent);
+            } else if (border == RectVisClients)
+            {
+                RectVisCars.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisTrips.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisService.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisClients.BorderBrush = new SolidColorBrush(Color.FromRgb(146, 146, 146));
+
             }
 
         }
@@ -70,14 +80,20 @@ namespace Carsharing
 
         private void ClientButton_Click(object sender, RoutedEventArgs e)
         {
-            TargetPage(RectVisClient);
+            PageFrame.Content = new Trips();
+            TargetPage(RectVisTrips);
 
         }
 
         private void ServiceButton_Click(object sender, RoutedEventArgs e)
         {
-
+            PageFrame.Content = new Service();
             TargetPage(RectVisService);
+        }
+        private void ClientsButton_Click(object sender, RoutedEventArgs e)
+        {
+            PageFrame.Content = new Clients();
+            TargetPage(RectVisClients);
         }
 
         private void ToolBar_MouseDown(object sender, MouseButtonEventArgs e)

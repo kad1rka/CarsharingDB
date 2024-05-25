@@ -4,19 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="ed42a10c69cc4e78b79c8ddff6cdb6d9" Name="Diagram1">
-        <EntityTypeShape EntityType="dbCarsharingModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbCarsharingModel.Автомобили" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbCarsharingModel.ДТП" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbCarsharingModel.Категории_Тех_Обслуживания" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbCarsharingModel.Клиенты" Width="1.5" PointX="0.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbCarsharingModel.Локации_Парковочных_Мест" Width="1.5" PointX="3.75" PointY="11.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbCarsharingModel.Оплата" Width="1.5" PointX="8.25" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbCarsharingModel.Поездки" Width="1.5" PointX="6" PointY="7.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbCarsharingModel.Статус_Автомобиля" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbCarsharingModel.Страховые_Данные" Width="1.5" PointX="3" PointY="17.375" IsExpanded="true" />
+      <Diagram DiagramId="ed42a10c69cc4e78b79c8ddff6cdb6d9" Name="Diagram1" ZoomLevel="95">
+        <EntityTypeShape EntityType="dbCarsharingModel.sysdiagrams" Width="1.5" PointX="1.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbCarsharingModel.Автомобили" Width="1.5" PointX="3.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbCarsharingModel.ДТП" Width="1.5" PointX="5.5" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbCarsharingModel.Категории_Тех_Обслуживания" Width="1.5" PointX="1" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbCarsharingModel.Клиенты" Width="1.5" PointX="8.625" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbCarsharingModel.Локации_Парковочных_Мест" Width="1.5" PointX="10.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbCarsharingModel.Оплата" Width="1.5" PointX="10.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbCarsharingModel.Поездки" Width="1.5" PointX="7.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbCarsharingModel.Статус_Автомобиля" Width="1.5" PointX="6.25" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbCarsharingModel.Страховые_Данные" Width="1.5" PointX="1.125" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="dbCarsharingModel.Тарифы" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="dbCarsharingModel.Техническое_Обслуживание" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbCarsharingModel.Техническое_Обслуживание" Width="1.5" PointX="3.5" PointY="3.5" IsExpanded="true" />
         <AssociationConnector Association="dbCarsharingModel.FK_ДТП_Автомобили" ManuallyRouted="false" />
         <AssociationConnector Association="dbCarsharingModel.FK_Поездки_Автомобили" ManuallyRouted="false" />
         <AssociationConnector Association="dbCarsharingModel.FK_Статус_Автомобиля_Автомобили" ManuallyRouted="false" />

@@ -199,13 +199,41 @@
                         </Style>
                     </Button.Style>
                 </Button>
+                <Button x:Name="ReportButton" VerticalAlignment="Top" Height="40" Grid.Row="1" BorderBrush="Transparent" Margin="0,170,0,0"  Click="ReportsButton_Click">
+                    <Border x:Name="RectVisReport" BorderBrush="Transparent" BorderThickness="1" CornerRadius="5,5,5,5">
+                        <StackPanel Orientation="Horizontal" Width="290">
+                            <Image Height="32" Source="/Source/report.png" Margin="10,0,15,0" />
+                            <TextBlock Text="Отчеты" VerticalAlignment="Center" FontFamily="Montserrat" FontSize="20" Foreground="White"/>
+                        </StackPanel>
+                    </Border>
+                    <Button.Style>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Border Background="{TemplateBinding Background}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                    <Setter Property="Background" Value="DeepSkyBlue"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
 
 
             </Grid>
             <Rectangle Height="25" Width="330" Fill="#2E3B47" RadiusX="10" RadiusY="10" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="0,0,0,0"/>
             <TextBlock Text="Пожалуйста, выберите категорию" Grid.Row="1" Grid.Column="1" FontFamily="Montserrat" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             
-            <Frame x:Name="PageFrame" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.Row="1"/>
+            <Frame x:Name="PageFrame" NavigationUIVisibility="Hidden"  Grid.Column="1" Grid.Row="1"/>
 
 
         </Grid>

@@ -201,7 +201,7 @@
                                         </DataGridTextColumn>
                                         <DataGridTextColumn Header="модель" Binding="{Binding Модель}" Width="140"/>
                                         <DataGridTextColumn Header="год" Binding="{Binding Год_Выпуска}" Width="60"/>
-                                        <DataGridTextColumn Header="VIN-номер" Binding="{Binding VIN_Номер}" Width="180"/>
+                                        <DataGridTextColumn Header="VIN-номер" Binding="{Binding VIN_Номер}" Width="190"/>
                                         <DataGridTextColumn Header="рег. номер" Binding="{Binding Номер}"  Width="150"/>
                                         <DataGridTextColumn Header="описание" Binding="{Binding Описание}" Width="*"/>
                                         <DataGridTemplateColumn>

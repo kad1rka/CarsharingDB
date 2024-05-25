@@ -33,6 +33,7 @@ namespace Carsharing
                 RectVisTrips.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 RectVisService.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 RectVisClients.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisReport.BorderBrush = new SolidColorBrush(Colors.Transparent);
 
             } else if (border == RectVisTrips)
             {
@@ -41,6 +42,7 @@ namespace Carsharing
                 RectVisTrips.BorderBrush = new SolidColorBrush(Color.FromRgb(146, 146, 146));
                 RectVisService.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 RectVisClients.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisReport.BorderBrush = new SolidColorBrush(Colors.Transparent);
             }
             else if (border == RectVisService)
             {
@@ -49,13 +51,22 @@ namespace Carsharing
                 RectVisTrips.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 RectVisService.BorderBrush = new SolidColorBrush(Color.FromRgb(146, 146, 146));
                 RectVisClients.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisReport.BorderBrush = new SolidColorBrush(Colors.Transparent);
             } else if (border == RectVisClients)
             {
                 RectVisCars.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 RectVisTrips.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 RectVisService.BorderBrush = new SolidColorBrush(Colors.Transparent);
                 RectVisClients.BorderBrush = new SolidColorBrush(Color.FromRgb(146, 146, 146));
+                RectVisReport.BorderBrush = new SolidColorBrush(Colors.Transparent);
 
+            } else if (border == RectVisReport)
+            {
+                RectVisCars.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisTrips.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisService.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisClients.BorderBrush = new SolidColorBrush(Colors.Transparent);
+                RectVisReport.BorderBrush = new SolidColorBrush(Color.FromRgb(146, 146, 146));
             }
 
         }
@@ -94,6 +105,11 @@ namespace Carsharing
         {
             PageFrame.Content = new Clients();
             TargetPage(RectVisClients);
+        }
+        private void ReportsButton_Click(object sender, RoutedEventArgs e)
+        {
+            PageFrame.Content = new Reports();
+            TargetPage(RectVisReport);
         }
 
         private void ToolBar_MouseDown(object sender, MouseButtonEventArgs e)

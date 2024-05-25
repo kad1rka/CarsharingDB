@@ -15,15 +15,16 @@ namespace Carsharing
     
     public partial class dbCarsharing : DbContext
     {
-        private static dbCarsharing _context;
+        public static dbCarsharing _context;
         public dbCarsharing()
             : base("name=dbCarsharing")
         {
         }
+    
         public static dbCarsharing GetContext()
         {
-            if (_context == null)
-                _context = new dbCarsharing();
+            if (_context == null)   
+                _context = new dbCarsharing();  
             return _context;
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
